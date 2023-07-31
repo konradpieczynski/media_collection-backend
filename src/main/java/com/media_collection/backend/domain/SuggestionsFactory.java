@@ -1,0 +1,19 @@
+package com.media_collection.backend.domain;
+
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+@Component
+public class SuggestionsFactory {
+    public final Serializable makeSuggestions(final String suggestionType) {
+        final String MOVIES = "movies";
+        final String SONGS = "songs";
+
+        return switch (suggestionType) {
+            case MOVIES -> new ArrayList<Movie>();
+            case SONGS -> new ArrayList<Song>();
+            default -> null;
+        };
+    }
+}

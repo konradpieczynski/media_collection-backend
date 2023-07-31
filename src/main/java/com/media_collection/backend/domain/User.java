@@ -23,6 +23,10 @@ public class User {
     @NotNull
     private String userName;
 
+    @Column(name = "suggestions")
+    @Enumerated(EnumType.STRING)
+    private Suggestions suggestions;
+
     @OneToMany(targetEntity = SongCollection.class,
             mappedBy = "user",
             cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
