@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.UserNotFoundException;
+import com.media_collection.backend.domain.User;
 import com.media_collection.backend.domain.UserDto;
 import com.media_collection.backend.mapper.UserMapper;
 import com.media_collection.backend.service.UserService;
@@ -29,16 +30,22 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapToUserDtoList(userService.getUsers()));
     }
 
-    @PostMapping(value ="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         userService.saveUser(userMapper.mapToUser(userDto));
-        return ResponseEntity.ok("New user " + userDto.getUserName() + " was successfully created");
+        return ResponseEntity.ok(userDto);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        User user = userMapper.mapToUser(userDto);
+        User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }
 
     @DeleteMapping(value = "/delete/{userId}")
-    public ResponseEntity<Object> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
-        String userName = userService.findUserById(userId).getUserName();
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         userService.deleteById(userId);
-        return ResponseEntity.ok("User " + userName + " was successfully deleted");
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.MovieCollectionNotFoundException;
+import com.media_collection.backend.domain.MovieCollection;
 import com.media_collection.backend.domain.MovieCollectionDto;
 import com.media_collection.backend.mapper.MovieCollectionMapper;
 import com.media_collection.backend.service.MovieCollectionService;
@@ -29,16 +30,22 @@ public class MovieCollectionController {
         return ResponseEntity.ok(movieCollectionMapper.mapToMovieCollectionDtoList(movieCollectionService.getMovieCollections()));
     }
 
-    @PostMapping(value ="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MovieCollectionDto> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
         movieCollectionService.saveMovieCollection(movieCollectionMapper.mapToMovieCollection(movieCollectionDto));
-        return ResponseEntity.ok("New movieCollection " + movieCollectionDto.getMovieCollectionName() + " was successfully created");
+        return ResponseEntity.ok(movieCollectionDto);
     }
 
-    @DeleteMapping(value = "/delete/{movieCollectionId}")
-    public ResponseEntity<Object> deleteMovieCollection(@PathVariable Long movieCollectionId) throws MovieCollectionNotFoundException {
-        String movieCollectionName = movieCollectionService.findMovieCollectionById(movieCollectionId).getName();
+    @PutMapping
+    public ResponseEntity<MovieCollectionDto> updateMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
+        MovieCollection movieCollection = movieCollectionMapper.mapToMovieCollection(movieCollectionDto);
+        MovieCollection savedMovieCollection = movieCollectionService.saveMovieCollection(movieCollection);
+        return ResponseEntity.ok(movieCollectionMapper.mapToMovieCollectionDto(savedMovieCollection));
+    }
+    
+    @DeleteMapping(value = "{movieCollectionId}")
+    public ResponseEntity<Void> deleteMovieCollection(@PathVariable Long movieCollectionId) throws MovieCollectionNotFoundException {
         movieCollectionService.deleteById(movieCollectionId);
-        return ResponseEntity.ok("MovieCollection " + movieCollectionName + " was successfully deleted");
+        return ResponseEntity.ok().build();
     }
 }

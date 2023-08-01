@@ -16,7 +16,7 @@ import java.util.List;
 public class UserDto {
     private Long userId;
     private String userName;
-    private Serializable suggestions;
+    private SuggestionsInterface suggestions;
     private List<Long> movieCollectionList = new ArrayList<>();
     private List<Long> songCollectionList = new ArrayList<>();
 }

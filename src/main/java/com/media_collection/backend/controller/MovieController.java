@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.MovieNotFoundException;
+import com.media_collection.backend.domain.Movie;
 import com.media_collection.backend.domain.MovieDto;
 import com.media_collection.backend.mapper.MovieMapper;
 import com.media_collection.backend.service.MovieService;
@@ -29,16 +30,22 @@ public class MovieController {
         return ResponseEntity.ok(movieMapper.mapToMovieDtoList(movieService.getMovies()));
     }
 
-    @PostMapping(value ="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createMovie(@RequestBody MovieDto movieDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MovieDto> createMovie(@RequestBody MovieDto movieDto) {
         movieService.saveMovie(movieMapper.mapToMovie(movieDto));
-        return ResponseEntity.ok("New movie " + movieDto.getMovieTitle() + " was successfully created");
+        return ResponseEntity.ok(movieDto);
     }
 
-    @DeleteMapping(value = "/delete/{movieId}")
-    public ResponseEntity<Object> deleteMovie(@PathVariable Long movieId) throws MovieNotFoundException {
-        String movieName = movieService.findMovieById(movieId).getTitle();
+    @PutMapping
+    public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto movieDto) {
+        Movie movie = movieMapper.mapToMovie(movieDto);
+        Movie savedMovie = movieService.saveMovie(movie);
+        return ResponseEntity.ok(movieMapper.mapToMovieDto(savedMovie));
+    }
+
+    @DeleteMapping(value = "{movieId}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long movieId) throws MovieNotFoundException {
         movieService.deleteById(movieId);
-        return ResponseEntity.ok("Movie " + movieName + " was successfully deleted");
+        return ResponseEntity.ok().build();
     }
 }

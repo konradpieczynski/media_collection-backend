@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.SongNotFoundException;
+import com.media_collection.backend.domain.Song;
 import com.media_collection.backend.domain.SongDto;
 import com.media_collection.backend.mapper.SongMapper;
 import com.media_collection.backend.service.SongService;
@@ -29,16 +30,22 @@ public class SongController {
         return ResponseEntity.ok(songMapper.mapToSongDtoList(songService.getSongs()));
     }
 
-    @PostMapping(value ="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createSong(@RequestBody SongDto songDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SongDto> createSong(@RequestBody SongDto songDto) {
         songService.saveSong(songMapper.mapToSong(songDto));
-        return ResponseEntity.ok("New song " + songDto.getSongTitle() + " was successfully created");
+        return ResponseEntity.ok(songDto);
     }
 
-    @DeleteMapping(value = "/delete/{songId}")
-    public ResponseEntity<Object> deleteSong(@PathVariable Long songId) throws SongNotFoundException {
-        String songName = songService.findSongById(songId).getTitle();
+    @PutMapping
+    public ResponseEntity<SongDto> updateSong(@RequestBody SongDto songDto) {
+        Song song = songMapper.mapToSong(songDto);
+        Song savedSong = songService.saveSong(song);
+        return ResponseEntity.ok(songMapper.mapToSongDto(savedSong));
+    }
+
+    @DeleteMapping(value = "{songId}")
+    public ResponseEntity<Void> deleteSong(@PathVariable Long songId) throws SongNotFoundException {
         songService.deleteById(songId);
-        return ResponseEntity.ok("Song " + songName + " was successfully deleted");
+        return ResponseEntity.ok().build();
     }
 }

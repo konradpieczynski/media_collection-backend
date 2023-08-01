@@ -33,7 +33,7 @@ public class User {
             fetch = FetchType.EAGER
     )
     @Builder.Default
-    public List<SongCollection> favoriteSongList = new ArrayList<>();
+    public List<SongCollection> songCollectionList = new ArrayList<>();
 
     @OneToMany(targetEntity = MovieCollection.class,
             mappedBy = "user",
