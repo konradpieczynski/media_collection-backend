@@ -4,6 +4,8 @@ import com.media_collection.backend.domain.User;
 import com.media_collection.backend.domain.UserDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserMapper {
     public User mapToUser(final UserDto userDto){
@@ -17,5 +19,10 @@ public class UserMapper {
         return UserDto.builder()
                 .userName(user.getUserName())
                 .build();
+    }
+    public List<UserDto> mapToUserDtoList(final List<User> userList) {
+        return userList.stream()
+                .map(this::mapToUserDto)
+                .toList();
     }
 }

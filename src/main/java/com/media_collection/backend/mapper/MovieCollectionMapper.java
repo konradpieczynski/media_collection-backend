@@ -1,13 +1,12 @@
 package com.media_collection.backend.mapper;
 
 import com.media_collection.backend.controller.exceptions.MovieNotFoundException;
-import com.media_collection.backend.domain.Movie;
-import com.media_collection.backend.domain.MovieCollection;
-import com.media_collection.backend.domain.MovieCollectionDto;
+import com.media_collection.backend.domain.*;
 import com.media_collection.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,11 +30,17 @@ public class MovieCollectionMapper {
                 .build();
     }
 
-    public MovieCollectionDto mapToUserDto(final MovieCollection movieCollection) {
+    public MovieCollectionDto mapToMovieCollectionDto(final MovieCollection movieCollection) {
         return MovieCollectionDto.builder()
                 .movieCollectionId(movieCollection.getMovieCollectionId())
                 .movieCollectionName(movieCollection.getName())
                 .movieCollectionList(movieCollection.getMovieList().stream().map(Movie::getMovieId).collect(Collectors.toList()))
                 .build();
+    }
+
+    public List<MovieCollectionDto> mapToMovieCollectionDtoList(final List<MovieCollection> movieCollectionList) {
+        return movieCollectionList.stream()
+                .map(this::mapToMovieCollectionDto)
+                .toList();
     }
 }

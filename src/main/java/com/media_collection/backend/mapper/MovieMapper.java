@@ -2,7 +2,11 @@ package com.media_collection.backend.mapper;
 
 import com.media_collection.backend.domain.Movie;
 import com.media_collection.backend.domain.MovieDto;
+import com.media_collection.backend.domain.Song;
+import com.media_collection.backend.domain.SongDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MovieMapper {
@@ -17,5 +21,11 @@ public class MovieMapper {
         return MovieDto.builder()
                 .movieTitle(movie.getTitle())
                 .build();
+    }
+
+    public List<MovieDto> mapToMovieDtoList(final List<Movie> movieList) {
+        return movieList.stream()
+                .map(this::mapToMovieDto)
+                .toList();
     }
 }

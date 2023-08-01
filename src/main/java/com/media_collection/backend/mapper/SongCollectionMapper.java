@@ -6,6 +6,7 @@ import com.media_collection.backend.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,11 +30,17 @@ public class SongCollectionMapper {
                 .build();
     }
 
-    public SongCollectionDto mapToUserDto(final SongCollection songCollection) {
+    public SongCollectionDto mapToSongCollectionDto(final SongCollection songCollection) {
         return SongCollectionDto.builder()
                 .songCollectionId(songCollection.getSongCollectionId())
                 .songCollectionName(songCollection.getName())
                 .songCollectionList(songCollection.getSongList().stream().map(Song::getSongId).collect(Collectors.toList()))
                 .build();
+    }
+
+    public List<SongCollectionDto> mapToSongCollectionDtoList(final List<SongCollection> songCollectionList) {
+        return songCollectionList.stream()
+                .map(this::mapToSongCollectionDto)
+                .toList();
     }
 }
