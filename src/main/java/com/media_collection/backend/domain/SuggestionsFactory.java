@@ -1,9 +1,6 @@
 package com.media_collection.backend.domain;
 
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 @Component
 public class SuggestionsFactory {
     public final SuggestionsInterface makeSuggestions(final String suggestionType) {

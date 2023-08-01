@@ -31,7 +31,7 @@ public class SongCollection {
 
     @PreRemove
     private void removeThisFromRelations() {
-        user.getFavoriteSongList().remove(this);
+        user.getSongCollectionList().remove(this);
         for (Song song : songList) {
             song.getSongCollectionList().remove(this);
         }

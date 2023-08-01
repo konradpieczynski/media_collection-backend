@@ -1,7 +1,6 @@
 package com.media_collection.backend.repository;
 
 import com.media_collection.backend.domain.Movie;
-import com.media_collection.backend.domain.Song;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
