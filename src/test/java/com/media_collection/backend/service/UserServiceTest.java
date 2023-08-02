@@ -66,7 +66,7 @@ class UserServiceTest {
         userService.saveUser(user);
         userService.saveUser(user2);
         //Then
-        assertEquals(2,userRepository.count());
+        assertEquals(2,userService.getUsers().size());
         userRepository.deleteAll();
     }
 
@@ -82,10 +82,10 @@ class UserServiceTest {
                 .userId(2L)
                 .build();
         //When
-        User savedUser1 = userService.saveUser(user);
-        User savedUser2 = userService.saveUser(user2);
+        userService.saveUser(user);
+        User savedUser = userService.saveUser(user2);
         try {
-            userService.deleteById(savedUser2.getUserId());
+            userService.deleteById(savedUser.getUserId());
         } catch (UserNotFoundException e) {
             fail();
         }

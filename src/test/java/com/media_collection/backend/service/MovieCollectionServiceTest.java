@@ -1,11 +1,8 @@
 package com.media_collection.backend.service;
 
 import com.media_collection.backend.controller.exceptions.MovieCollectionNotFoundException;
-import com.media_collection.backend.controller.exceptions.MovieCollectionNotFoundException;
-import com.media_collection.backend.domain.MovieCollection;
 import com.media_collection.backend.domain.MovieCollection;
 import com.media_collection.backend.domain.User;
-import com.media_collection.backend.repository.MovieCollectionRepository;
 import com.media_collection.backend.repository.MovieCollectionRepository;
 import com.media_collection.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -84,7 +81,7 @@ class MovieCollectionServiceTest {
         movieCollectionService.saveMovieCollection(movieCollection);
         movieCollectionService.saveMovieCollection(movieCollection2);
         //Then
-        assertEquals(2,movieCollectionRepository.count());
+        assertEquals(2,movieCollectionService.getMovieCollections().size());
         movieCollectionRepository.deleteAll();
     }
 
@@ -103,10 +100,10 @@ class MovieCollectionServiceTest {
                 .movieCollectionId(2L)
                 .build();
         //When
-        MovieCollection savedMovieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
-        MovieCollection savedMovieCollection2 = movieCollectionService.saveMovieCollection(movieCollection2);
+        movieCollectionService.saveMovieCollection(movieCollection);
+        MovieCollection savedMovieCollection = movieCollectionService.saveMovieCollection(movieCollection2);
         try {
-            movieCollectionService.deleteById(savedMovieCollection2.getMovieCollectionId());
+            movieCollectionService.deleteById(savedMovieCollection.getMovieCollectionId());
         } catch (MovieCollectionNotFoundException e) {
             fail();
         }

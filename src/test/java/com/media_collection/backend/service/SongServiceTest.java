@@ -66,7 +66,7 @@ class SongServiceTest {
         songService.saveSong(song);
         songService.saveSong(song2);
         //Then
-        assertEquals(2,songRepository.count());
+        assertEquals(2,songService.getSongs().size());
         songRepository.deleteAll();
     }
 
@@ -82,10 +82,10 @@ class SongServiceTest {
                 .songId(2L)
                 .build();
         //When
-        Song savedSong1 = songService.saveSong(song);
-        Song savedSong2 = songService.saveSong(song2);
+        songService.saveSong(song);
+        Song savedSong = songService.saveSong(song2);
         try {
-            songService.deleteById(savedSong2.getSongId());
+            songService.deleteById(savedSong.getSongId());
         } catch (SongNotFoundException e) {
             fail();
         }

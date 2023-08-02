@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -82,7 +81,7 @@ class SongCollectionServiceTest {
         songCollectionService.saveSongCollection(songCollection);
         songCollectionService.saveSongCollection(songCollection2);
         //Then
-        assertEquals(2,songCollectionRepository.count());
+        assertEquals(2,songCollectionService.getSongCollections().size());
         songCollectionRepository.deleteAll();
     }
 
@@ -101,10 +100,10 @@ class SongCollectionServiceTest {
                 .songCollectionId(2L)
                 .build();
         //When
-        SongCollection savedSongCollection1 = songCollectionService.saveSongCollection(songCollection);
-        SongCollection savedSongCollection2 = songCollectionService.saveSongCollection(songCollection2);
+        songCollectionService.saveSongCollection(songCollection);
+        SongCollection savedSongCollection = songCollectionService.saveSongCollection(songCollection2);
         try {
-            songCollectionService.deleteById(savedSongCollection2.getSongCollectionId());
+            songCollectionService.deleteById(savedSongCollection.getSongCollectionId());
         } catch (SongCollectionNotFoundException e) {
             fail();
         }
