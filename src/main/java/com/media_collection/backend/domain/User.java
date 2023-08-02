@@ -30,7 +30,7 @@ public class User {
     @OneToMany(targetEntity = SongCollection.class,
             mappedBy = "user",
             cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     @Builder.Default
     public List<SongCollection> songCollectionList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class User {
     @OneToMany(targetEntity = MovieCollection.class,
             mappedBy = "user",
             cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     @Builder.Default
     public List<MovieCollection> movieCollectionList = new ArrayList<>();

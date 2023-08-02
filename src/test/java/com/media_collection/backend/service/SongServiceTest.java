@@ -45,9 +45,8 @@ class SongServiceTest {
         //When
         Song savedSong = songService.saveSong(song);
         //Then
-        assertEquals(song.getSongId(),savedSong.getSongId());
         try {
-            assertEquals(1L, songService.findSongById(1L).getSongId());
+            assertEquals(savedSong.getSongId(), songService.findSongById(savedSong.getSongId()).getSongId());
         } catch (SongNotFoundException e) {
             fail();
         }
@@ -83,10 +82,10 @@ class SongServiceTest {
                 .songId(2L)
                 .build();
         //When
-        songService.saveSong(song);
-        songService.saveSong(song2);
+        Song savedSong1 = songService.saveSong(song);
+        Song savedSong2 = songService.saveSong(song2);
         try {
-            songService.deleteById(2L);
+            songService.deleteById(savedSong2.getSongId());
         } catch (SongNotFoundException e) {
             fail();
         }

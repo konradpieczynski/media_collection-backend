@@ -45,9 +45,8 @@ class MovieServiceTest {
         //When
         Movie savedMovie = movieService.saveMovie(movie);
         //Then
-        assertEquals(movie.getMovieId(),savedMovie.getMovieId());
         try {
-            assertEquals(1L, movieService.findMovieById(1L).getMovieId());
+            assertEquals(savedMovie.getMovieId(), movieService.findMovieById(savedMovie.getMovieId()).getMovieId());
         } catch (MovieNotFoundException e) {
             fail();
         }
@@ -83,10 +82,10 @@ class MovieServiceTest {
                 .movieId(2L)
                 .build();
         //When
-        movieService.saveMovie(movie);
-        movieService.saveMovie(movie2);
+        Movie savedMovie1 = movieService.saveMovie(movie);
+        Movie savedMovie2 = movieService.saveMovie(movie2);
         try {
-            movieService.deleteById(2L);
+            movieService.deleteById(savedMovie2.getMovieId());
         } catch (MovieNotFoundException e) {
             fail();
         }

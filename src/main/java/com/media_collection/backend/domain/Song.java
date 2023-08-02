@@ -24,7 +24,7 @@ public class Song {
     @Column(name = "author")
     private String author;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "join_song_collection",
             joinColumns = {

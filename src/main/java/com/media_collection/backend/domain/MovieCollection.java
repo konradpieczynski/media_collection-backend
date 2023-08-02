@@ -25,7 +25,7 @@ public class MovieCollection {
     @Column(name = "collection_name")
     private String name;
 
-    @ManyToMany(mappedBy = "movieCollectionList", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "movieCollectionList", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Movie> movieList = new ArrayList<>();
     @PreRemove

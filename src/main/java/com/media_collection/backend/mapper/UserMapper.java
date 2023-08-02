@@ -45,7 +45,7 @@ public class UserMapper {
                         })
                         .toList()
                 )
-                .suggestions(Suggestions.valueOf(userDto.getSuggestions().getType()))
+                .suggestions(Suggestions.valueOf(userDto.getSuggestions().getType().toUpperCase()))
                 .build();
     }
 

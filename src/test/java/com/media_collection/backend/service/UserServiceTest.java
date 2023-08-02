@@ -45,9 +45,8 @@ class UserServiceTest {
         //When
         User savedUser = userService.saveUser(user);
         //Then
-        assertEquals(user.getUserId(),savedUser.getUserId());
         try {
-            assertEquals(1L, userService.findUserById(1L).getUserId());
+            assertEquals(savedUser.getUserId(), userService.findUserById(savedUser.getUserId()).getUserId());
         } catch (UserNotFoundException e) {
             fail();
         }
@@ -83,10 +82,10 @@ class UserServiceTest {
                 .userId(2L)
                 .build();
         //When
-        userService.saveUser(user);
-        userService.saveUser(user2);
+        User savedUser1 = userService.saveUser(user);
+        User savedUser2 = userService.saveUser(user2);
         try {
-            userService.deleteById(2L);
+            userService.deleteById(savedUser2.getUserId());
         } catch (UserNotFoundException e) {
             fail();
         }

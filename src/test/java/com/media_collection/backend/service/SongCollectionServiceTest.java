@@ -2,12 +2,15 @@ package com.media_collection.backend.service;
 
 import com.media_collection.backend.controller.exceptions.SongCollectionNotFoundException;
 import com.media_collection.backend.domain.SongCollection;
+import com.media_collection.backend.domain.User;
 import com.media_collection.backend.repository.SongCollectionRepository;
+import com.media_collection.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,11 +24,17 @@ class SongCollectionServiceTest {
 
     @Autowired
     SongCollectionRepository songCollectionRepository;
+
+    @Autowired
+    UserRepository userRepository;
     
     @Test
     void saveSongCollection() {
         //Given
+        User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
+                .songCollectionId(1L)
+                .user(user)
                 .name("Test songCollection")
                 .build();
         //When
@@ -39,16 +48,18 @@ class SongCollectionServiceTest {
     @Test
     void findSongCollectionById() {
         //Given
+        User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
                 .songCollectionId(1L)
+                .user(user)
                 .name("Test songCollection")
                 .build();
         //When
         SongCollection savedSongCollection = songCollectionService.saveSongCollection(songCollection);
         //Then
-        assertEquals(songCollection.getSongCollectionId(),savedSongCollection.getSongCollectionId());
         try {
-            assertEquals(1L, songCollectionService.findSongCollectionById(1L).getSongCollectionId());
+            assertEquals(savedSongCollection.getSongCollectionId(),
+                    songCollectionService.findSongCollectionById(savedSongCollection.getSongCollectionId()).getSongCollectionId());
         } catch (SongCollectionNotFoundException e) {
             fail();
         }
@@ -58,11 +69,14 @@ class SongCollectionServiceTest {
     @Test
     void getSongCollections() {
         //Given
+        User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
                 .name("Test songCollection")
+                .user(user)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
                 .name("Test songCollection2")
+                .user(user)
                 .build();
         //When
         songCollectionService.saveSongCollection(songCollection);
@@ -75,19 +89,22 @@ class SongCollectionServiceTest {
     @Test
     void deleteById() {
         //Given
+        User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
                 .name("Test songCollection")
+                .user(user)
                 .songCollectionId(1L)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
                 .name("Test songCollection2")
+                .user(user)
                 .songCollectionId(2L)
                 .build();
         //When
-        songCollectionService.saveSongCollection(songCollection);
-        songCollectionService.saveSongCollection(songCollection2);
+        SongCollection savedSongCollection1 = songCollectionService.saveSongCollection(songCollection);
+        SongCollection savedSongCollection2 = songCollectionService.saveSongCollection(songCollection2);
         try {
-            songCollectionService.deleteById(2L);
+            songCollectionService.deleteById(savedSongCollection2.getSongCollectionId());
         } catch (SongCollectionNotFoundException e) {
             fail();
         }
@@ -99,12 +116,15 @@ class SongCollectionServiceTest {
     @Test
     void findSongCollectionBySongCollectionName() {
         //Given
+        User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
                 .name("Test songCollection")
+                .user(user)
                 .songCollectionId(1L)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
                 .name("Test songCollection2")
+                .user(user)
                 .songCollectionId(2L)
                 .build();
         //When

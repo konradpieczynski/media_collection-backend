@@ -25,7 +25,7 @@ public class SongCollection {
     @Column(name = "collection_name")
     private String name;
 
-    @ManyToMany(mappedBy = "songCollectionList", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "songCollectionList", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Song> songList = new ArrayList<>();
 
