@@ -16,6 +16,7 @@ public class MovieCollectionMapper {
     MovieService movieService;
     public MovieCollection mapToMovieCollection(final MovieCollectionDto movieCollectionDto) {
         return MovieCollection.builder()
+                .movieCollectionId(movieCollectionDto.getMovieCollectionId())
                 .name(movieCollectionDto.getMovieCollectionName())
                 .movieList(movieCollectionDto.getMovieCollectionList()
                         .stream()

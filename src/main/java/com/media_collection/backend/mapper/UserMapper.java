@@ -51,6 +51,7 @@ public class UserMapper {
 
     public UserDto mapToUserDto(final User user) {
         return UserDto.builder()
+                .userId(user.getUserId())
                 .userName(user.getUserName())
                 .suggestions(suggestionsFactory.makeSuggestions(user.getSuggestions().getValue()))
                 .movieCollectionList(user.getMovieCollectionList()

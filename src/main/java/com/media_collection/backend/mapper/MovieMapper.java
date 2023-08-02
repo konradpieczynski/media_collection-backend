@@ -19,6 +19,7 @@ public class MovieMapper {
 
     public MovieDto mapToMovieDto(final Movie movie) {
         return MovieDto.builder()
+                .movieId(movie.getMovieId())
                 .movieTitle(movie.getTitle())
                 .build();
     }

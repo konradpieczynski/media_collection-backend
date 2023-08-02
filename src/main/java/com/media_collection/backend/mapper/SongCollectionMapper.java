@@ -16,6 +16,7 @@ public class SongCollectionMapper {
     SongService songService;
     public SongCollection mapToSongCollection(final SongCollectionDto songCollectionDto) {
         return SongCollection.builder()
+                .songCollectionId(songCollectionDto.getSongCollectionId())
                 .name(songCollectionDto.getSongCollectionName())
                 .songList(songCollectionDto.getSongCollectionList()
                         .stream()
