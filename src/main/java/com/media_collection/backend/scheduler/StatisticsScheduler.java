@@ -16,7 +16,8 @@ public class StatisticsScheduler {
     private final MovieCollectionService movieCollectionService;
     private final SongService songService;
     private final SongCollectionService songCollectionService;
-        @Scheduled(cron = "0 0 0 * * *")
+
+    @Scheduled(cron = "0 0 0 * * *")
     public void sendStatistics(){
         log.info(
                 "Statistics:\n"
