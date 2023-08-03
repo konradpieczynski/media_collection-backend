@@ -18,11 +18,11 @@ public class Movie {
     @Column(name = "movie_id")
     private Long movieId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "movie_title")
+    private String movieTitle;
 
-    @Column(name = "author")
-    private String author;
+    @Column(name = "movie_author")
+    private String movieAuthor;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(

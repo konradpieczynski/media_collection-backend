@@ -25,12 +25,12 @@ class MovieServiceTest {
     void saveMovie() {
         //Given
         Movie movie = Movie.builder()
-                .title("Test movie")
+                .movieTitle("Test movie")
                 .build();
         //When
         Movie savedMovie = movieService.saveMovie(movie);
         //Then
-        assertEquals(movie.getTitle(),savedMovie.getTitle());
+        assertEquals(movie.getMovieTitle(),savedMovie.getMovieTitle());
         assertEquals(1,movieService.findMovieByMovieName("Test movie").size());
         movieRepository.deleteAll();
     }
@@ -40,7 +40,7 @@ class MovieServiceTest {
         //Given
         Movie movie = Movie.builder()
                 .movieId(1L)
-                .title("Test movie")
+                .movieTitle("Test movie")
                 .build();
         //When
         Movie savedMovie = movieService.saveMovie(movie);
@@ -57,10 +57,10 @@ class MovieServiceTest {
     void getMovies() {
         //Given
         Movie movie = Movie.builder()
-                .title("Test movie")
+                .movieTitle("Test movie")
                 .build();
         Movie movie2 = Movie.builder()
-                .title("Test movie2")
+                .movieTitle("Test movie2")
                 .build();
         //When
         movieService.saveMovie(movie);
@@ -74,11 +74,11 @@ class MovieServiceTest {
     void deleteById() {
         //Given
         Movie movie = Movie.builder()
-                .title("Test movie")
+                .movieTitle("Test movie")
                 .movieId(1L)
                 .build();
         Movie movie2 = Movie.builder()
-                .title("Test movie2")
+                .movieTitle("Test movie2")
                 .movieId(2L)
                 .build();
         //When
@@ -98,11 +98,11 @@ class MovieServiceTest {
     void findMovieByMovieName() {
         //Given
         Movie movie = Movie.builder()
-                .title("Test movie")
+                .movieTitle("Test movie")
                 .movieId(1L)
                 .build();
         Movie movie2 = Movie.builder()
-                .title("Test movie2")
+                .movieTitle("Test movie2")
                 .movieId(2L)
                 .build();
         //When
@@ -111,7 +111,7 @@ class MovieServiceTest {
         List<Movie> foundMovies = movieService.findMovieByMovieName("Test movie2");
 
         //Then
-        assertEquals("Test movie2", foundMovies.get(0).getTitle());
+        assertEquals("Test movie2", foundMovies.get(0).getMovieTitle());
         movieRepository.deleteAll();
     }
 }

@@ -22,5 +22,5 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
     @Override
     void deleteById(Long MovieId);
 
-    List<Movie> findMoviesByTitle(String title);
+    List<Movie> findMoviesByMovieTitle(String title);
 }

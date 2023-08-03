@@ -18,11 +18,11 @@ public class Song {
     @Column(name = "song_id")
     private Long songId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "song_title")
+    private String songTitle;
 
-    @Column(name = "author")
-    private String author;
+    @Column(name = "song_author")
+    private String songAuthor;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(

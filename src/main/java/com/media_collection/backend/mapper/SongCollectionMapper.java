@@ -17,7 +17,7 @@ public class SongCollectionMapper {
     public SongCollection mapToSongCollection(final SongCollectionDto songCollectionDto) {
         return SongCollection.builder()
                 .songCollectionId(songCollectionDto.getSongCollectionId())
-                .name(songCollectionDto.getSongCollectionName())
+                .songCollectionName(songCollectionDto.getSongCollectionName())
                 .songList(songCollectionDto.getSongCollectionList()
                         .stream()
                         .map(songId -> {
@@ -34,7 +34,7 @@ public class SongCollectionMapper {
     public SongCollectionDto mapToSongCollectionDto(final SongCollection songCollection) {
         return SongCollectionDto.builder()
                 .songCollectionId(songCollection.getSongCollectionId())
-                .songCollectionName(songCollection.getName())
+                .songCollectionName(songCollection.getSongCollectionName())
                 .songCollectionList(songCollection.getSongList().stream().map(Song::getSongId).collect(Collectors.toList()))
                 .build();
     }

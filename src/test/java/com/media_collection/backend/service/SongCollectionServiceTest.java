@@ -34,12 +34,12 @@ class SongCollectionServiceTest {
         SongCollection songCollection = SongCollection.builder()
                 .songCollectionId(1L)
                 .user(user)
-                .name("Test songCollection")
+                .songCollectionName("Test songCollection")
                 .build();
         //When
         SongCollection savedSongCollection = songCollectionService.saveSongCollection(songCollection);
         //Then
-        assertEquals(songCollection.getName(),savedSongCollection.getName());
+        assertEquals(songCollection.getSongCollectionName(),savedSongCollection.getSongCollectionName());
         assertEquals(1,songCollectionService.findSongCollectionBySongCollectionName("Test songCollection").size());
         songCollectionRepository.deleteAll();
     }
@@ -51,7 +51,7 @@ class SongCollectionServiceTest {
         SongCollection songCollection = SongCollection.builder()
                 .songCollectionId(1L)
                 .user(user)
-                .name("Test songCollection")
+                .songCollectionName("Test songCollection")
                 .build();
         //When
         SongCollection savedSongCollection = songCollectionService.saveSongCollection(songCollection);
@@ -70,11 +70,11 @@ class SongCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
-                .name("Test songCollection")
+                .songCollectionName("Test songCollection")
                 .user(user)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
-                .name("Test songCollection2")
+                .songCollectionName("Test songCollection2")
                 .user(user)
                 .build();
         //When
@@ -90,12 +90,12 @@ class SongCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
-                .name("Test songCollection")
+                .songCollectionName("Test songCollection")
                 .user(user)
                 .songCollectionId(1L)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
-                .name("Test songCollection2")
+                .songCollectionName("Test songCollection2")
                 .user(user)
                 .songCollectionId(2L)
                 .build();
@@ -117,12 +117,12 @@ class SongCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         SongCollection songCollection = SongCollection.builder()
-                .name("Test songCollection")
+                .songCollectionName("Test songCollection")
                 .user(user)
                 .songCollectionId(1L)
                 .build();
         SongCollection songCollection2 = SongCollection.builder()
-                .name("Test songCollection2")
+                .songCollectionName("Test songCollection2")
                 .user(user)
                 .songCollectionId(2L)
                 .build();
@@ -132,7 +132,7 @@ class SongCollectionServiceTest {
         List<SongCollection> foundSongCollections = songCollectionService.findSongCollectionBySongCollectionName("Test songCollection2");
 
         //Then
-        assertEquals("Test songCollection2", foundSongCollections.get(0).getName());
+        assertEquals("Test songCollection2", foundSongCollections.get(0).getSongCollectionName());
         songCollectionRepository.deleteAll();
     }
 }

@@ -31,6 +31,6 @@ public class SongService {
     }
 
     public List<Song> findSongBySongName(String title) {
-        return repository.findSongsByTitle(title);
+        return repository.findSongsBySongTitle(title);
     }
 }

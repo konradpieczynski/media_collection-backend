@@ -31,6 +31,6 @@ public class MovieCollectionService {
     }
 
     public List<MovieCollection> findMovieCollectionByMovieCollectionName(String name) {
-        return repository.findMovieCollectionsByName(name);
+        return repository.findMovieCollectionsByMovieCollectionName(name);
     }
 }

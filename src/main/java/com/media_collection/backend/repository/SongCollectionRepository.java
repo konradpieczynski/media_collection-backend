@@ -22,5 +22,5 @@ public interface SongCollectionRepository extends CrudRepository<SongCollection,
     @Override
     void deleteById(Long SongCollectionId);
 
-    List<SongCollection> findSongCollectionsByName(String name);
+    List<SongCollection> findSongCollectionsBySongCollectionName(String name);
 }

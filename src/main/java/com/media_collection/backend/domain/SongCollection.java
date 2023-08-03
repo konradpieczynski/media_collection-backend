@@ -23,7 +23,7 @@ public class SongCollection {
     private User user;
 
     @Column(name = "collection_name")
-    private String name;
+    private String songCollectionName;
 
     @ManyToMany(mappedBy = "songCollectionList", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default

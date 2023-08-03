@@ -17,7 +17,7 @@ public class MovieCollectionMapper {
     public MovieCollection mapToMovieCollection(final MovieCollectionDto movieCollectionDto) {
         return MovieCollection.builder()
                 .movieCollectionId(movieCollectionDto.getMovieCollectionId())
-                .name(movieCollectionDto.getMovieCollectionName())
+                .movieCollectionName(movieCollectionDto.getMovieCollectionName())
                 .movieList(movieCollectionDto.getMovieCollectionList()
                         .stream()
                         .map(movieId -> {
@@ -34,7 +34,7 @@ public class MovieCollectionMapper {
     public MovieCollectionDto mapToMovieCollectionDto(final MovieCollection movieCollection) {
         return MovieCollectionDto.builder()
                 .movieCollectionId(movieCollection.getMovieCollectionId())
-                .movieCollectionName(movieCollection.getName())
+                .movieCollectionName(movieCollection.getMovieCollectionName())
                 .movieCollectionList(movieCollection.getMovieList().stream().map(Movie::getMovieId).collect(Collectors.toList()))
                 .build();
     }

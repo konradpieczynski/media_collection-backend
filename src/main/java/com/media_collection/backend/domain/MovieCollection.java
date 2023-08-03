@@ -22,8 +22,8 @@ public class MovieCollection {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "collection_name")
-    private String name;
+    @Column(name = "movie_collection_name")
+    private String movieCollectionName;
 
     @ManyToMany(mappedBy = "movieCollectionList", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default

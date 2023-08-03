@@ -11,14 +11,14 @@ public class SongMapper {
     public Song mapToSong(final SongDto songDto){
         return Song.builder()
                 .songId(songDto.getSongId())
-                .title(songDto.getSongTitle())
+                .songTitle(songDto.getSongTitle())
                 .build();
     }
 
     public SongDto mapToSongDto(final Song song) {
         return SongDto.builder()
                 .songId(song.getSongId())
-                .songTitle(song.getTitle())
+                .songTitle(song.getSongTitle())
                 .build();
     }
 

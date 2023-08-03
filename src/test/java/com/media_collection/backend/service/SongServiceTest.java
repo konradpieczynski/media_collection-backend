@@ -25,12 +25,12 @@ class SongServiceTest {
     void saveSong() {
         //Given
         Song song = Song.builder()
-                .title("Test song")
+                .songTitle("Test song")
                 .build();
         //When
         Song savedSong = songService.saveSong(song);
         //Then
-        assertEquals(song.getTitle(),savedSong.getTitle());
+        assertEquals(song.getSongTitle(),savedSong.getSongTitle());
         assertEquals(1,songService.findSongBySongName("Test song").size());
         songRepository.deleteAll();
     }
@@ -40,7 +40,7 @@ class SongServiceTest {
         //Given
         Song song = Song.builder()
                 .songId(1L)
-                .title("Test song")
+                .songTitle("Test song")
                 .build();
         //When
         Song savedSong = songService.saveSong(song);
@@ -57,10 +57,10 @@ class SongServiceTest {
     void getSongs() {
         //Given
         Song song = Song.builder()
-                .title("Test song")
+                .songTitle("Test song")
                 .build();
         Song song2 = Song.builder()
-                .title("Test song2")
+                .songTitle("Test song2")
                 .build();
         //When
         songService.saveSong(song);
@@ -74,11 +74,11 @@ class SongServiceTest {
     void deleteById() {
         //Given
         Song song = Song.builder()
-                .title("Test song")
+                .songTitle("Test song")
                 .songId(1L)
                 .build();
         Song song2 = Song.builder()
-                .title("Test song2")
+                .songTitle("Test song2")
                 .songId(2L)
                 .build();
         //When
@@ -98,11 +98,11 @@ class SongServiceTest {
     void findSongBySongName() {
         //Given
         Song song = Song.builder()
-                .title("Test song")
+                .songTitle("Test song")
                 .songId(1L)
                 .build();
         Song song2 = Song.builder()
-                .title("Test song2")
+                .songTitle("Test song2")
                 .songId(2L)
                 .build();
         //When
@@ -111,7 +111,7 @@ class SongServiceTest {
         List<Song> foundSongs = songService.findSongBySongName("Test song2");
 
         //Then
-        assertEquals("Test song2", foundSongs.get(0).getTitle());
+        assertEquals("Test song2", foundSongs.get(0).getSongTitle());
         songRepository.deleteAll();
     }
 }

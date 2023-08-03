@@ -34,12 +34,12 @@ class MovieCollectionServiceTest {
         MovieCollection movieCollection = MovieCollection.builder()
                 .movieCollectionId(1L)
                 .user(user)
-                .name("Test movieCollection")
+                .movieCollectionName("Test movieCollection")
                 .build();
         //When
         MovieCollection savedMovieCollection = movieCollectionService.saveMovieCollection(movieCollection);
         //Then
-        assertEquals(movieCollection.getName(),savedMovieCollection.getName());
+        assertEquals(movieCollection.getMovieCollectionName(),savedMovieCollection.getMovieCollectionName());
         assertEquals(1,movieCollectionService.findMovieCollectionByMovieCollectionName("Test movieCollection").size());
         movieCollectionRepository.deleteAll();
     }
@@ -51,7 +51,7 @@ class MovieCollectionServiceTest {
         MovieCollection movieCollection = MovieCollection.builder()
                 .movieCollectionId(1L)
                 .user(user)
-                .name("Test movieCollection")
+                .movieCollectionName("Test movieCollection")
                 .build();
         //When
         MovieCollection savedMovieCollection = movieCollectionService.saveMovieCollection(movieCollection);
@@ -70,11 +70,11 @@ class MovieCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         MovieCollection movieCollection = MovieCollection.builder()
-                .name("Test movieCollection")
+                .movieCollectionName("Test movieCollection")
                 .user(user)
                 .build();
         MovieCollection movieCollection2 = MovieCollection.builder()
-                .name("Test movieCollection2")
+                .movieCollectionName("Test movieCollection2")
                 .user(user)
                 .build();
         //When
@@ -90,12 +90,12 @@ class MovieCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         MovieCollection movieCollection = MovieCollection.builder()
-                .name("Test movieCollection")
+                .movieCollectionName("Test movieCollection")
                 .user(user)
                 .movieCollectionId(1L)
                 .build();
         MovieCollection movieCollection2 = MovieCollection.builder()
-                .name("Test movieCollection2")
+                .movieCollectionName("Test movieCollection2")
                 .user(user)
                 .movieCollectionId(2L)
                 .build();
@@ -117,12 +117,12 @@ class MovieCollectionServiceTest {
         //Given
         User user = userRepository.save(User.builder().userName("Test user").build());
         MovieCollection movieCollection = MovieCollection.builder()
-                .name("Test movieCollection")
+                .movieCollectionName("Test movieCollection")
                 .user(user)
                 .movieCollectionId(1L)
                 .build();
         MovieCollection movieCollection2 = MovieCollection.builder()
-                .name("Test movieCollection2")
+                .movieCollectionName("Test movieCollection2")
                 .user(user)
                 .movieCollectionId(2L)
                 .build();
@@ -132,7 +132,7 @@ class MovieCollectionServiceTest {
         List<MovieCollection> foundMovieCollections = movieCollectionService.findMovieCollectionByMovieCollectionName("Test movieCollection2");
 
         //Then
-        assertEquals("Test movieCollection2", foundMovieCollections.get(0).getName());
+        assertEquals("Test movieCollection2", foundMovieCollections.get(0).getMovieCollectionName());
         movieCollectionRepository.deleteAll();
     }
 }
