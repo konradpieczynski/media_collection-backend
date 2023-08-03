@@ -43,7 +43,7 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }
 
-    @DeleteMapping(value = "/delete/{userId}")
+    @DeleteMapping(value = "{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         userService.deleteById(userId);
         return ResponseEntity.ok().build();
