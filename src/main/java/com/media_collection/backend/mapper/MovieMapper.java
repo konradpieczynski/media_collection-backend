@@ -12,6 +12,7 @@ public class MovieMapper {
         return Movie.builder()
                 .movieId(movieDto.getMovieId())
                 .movieTitle(movieDto.getMovieTitle())
+                .movieAuthor(movieDto.getMovieAuthor())
                 .build();
     }
 
@@ -19,6 +20,7 @@ public class MovieMapper {
         return MovieDto.builder()
                 .movieId(movie.getMovieId())
                 .movieTitle(movie.getMovieTitle())
+                .movieAuthor(movie.getMovieAuthor())
                 .build();
     }
 

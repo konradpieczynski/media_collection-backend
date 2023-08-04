@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class MovieDto {
     private Long movieId;
     private String movieTitle;
+    private String movieAuthor;
 }

@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class SongDto {
     private Long songId;
     private String songTitle;
+    private String songAuthor;
 }

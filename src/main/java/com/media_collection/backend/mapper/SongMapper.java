@@ -12,6 +12,7 @@ public class SongMapper {
         return Song.builder()
                 .songId(songDto.getSongId())
                 .songTitle(songDto.getSongTitle())
+                .songAuthor(songDto.getSongAuthor())
                 .build();
     }
 
@@ -19,6 +20,7 @@ public class SongMapper {
         return SongDto.builder()
                 .songId(song.getSongId())
                 .songTitle(song.getSongTitle())
+                .songAuthor(song.getSongAuthor())
                 .build();
     }
 

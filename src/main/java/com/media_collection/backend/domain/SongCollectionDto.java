@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SongCollectionDto {
     private Long songCollectionId;
+    private String user;
     private String songCollectionName;
     private List<Long> songCollectionList = new ArrayList<>();
 }
