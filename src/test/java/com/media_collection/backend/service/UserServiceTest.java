@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -29,6 +29,7 @@ class UserServiceTest {
                 .build();
         //When
         User savedUser = userService.saveUser(user);
+        System.out.println("Saved id: " +savedUser.getUserId());
         //Then
         assertEquals(user.getUserName(),savedUser.getUserName());
         assertEquals(1,userService.findUserByUserName("Test user").size());

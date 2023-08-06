@@ -9,18 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface SongRepository extends CrudRepository<Song, Long> {
-
-    @Override
-    Song save(Song Song);
-
-    @Override
-    Optional<Song> findById(Long SongId);
-
     @Override
     List<Song> findAll();
-
-    @Override
-    void deleteById(Long SongId);
-
     List<Song> findSongsBySongTitle(String title);
 }

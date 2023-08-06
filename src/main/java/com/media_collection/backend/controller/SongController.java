@@ -31,9 +31,9 @@ public class SongController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SongDto> createSong(@RequestBody SongDto songDto) {
+    public ResponseEntity<Void> createSong(@RequestBody SongDto songDto) {
         songService.saveSong(songMapper.mapToSong(songDto));
-        return ResponseEntity.ok(songDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping

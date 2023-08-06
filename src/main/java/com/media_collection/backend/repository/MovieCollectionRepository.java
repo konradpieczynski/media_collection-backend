@@ -9,18 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface MovieCollectionRepository extends CrudRepository<MovieCollection, Long> {
-
-    @Override
-    MovieCollection save(MovieCollection MovieCollection);
-
-    @Override
-    Optional<MovieCollection> findById(Long MovieCollectionId);
-
     @Override
     List<MovieCollection> findAll();
-
-    @Override
-    void deleteById(Long MovieCollectionId);
 
     List<MovieCollection> findMovieCollectionsByMovieCollectionName(String name);
 }

@@ -31,9 +31,9 @@ public class SongCollectionController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SongCollectionDto> createSongCollection(@RequestBody SongCollectionDto songCollectionDto) {
+    public ResponseEntity<Void> createSongCollection(@RequestBody SongCollectionDto songCollectionDto) {
         songCollectionService.saveSongCollection(songCollectionMapper.mapToSongCollection(songCollectionDto));
-        return ResponseEntity.ok(songCollectionDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping

@@ -31,9 +31,9 @@ public class MovieCollectionController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MovieCollectionDto> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
+    public ResponseEntity<Void> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
         movieCollectionService.saveMovieCollection(movieCollectionMapper.mapToMovieCollection(movieCollectionDto));
-        return ResponseEntity.ok(movieCollectionDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
