@@ -1,14 +1,9 @@
 package com.media_collection.backend.controller;
 
 import com.google.gson.Gson;
-import com.media_collection.backend.domain.Suggestions;
-import com.media_collection.backend.domain.SuggestionsFactory;
-import com.media_collection.backend.domain.User;
-import com.media_collection.backend.domain.UserDto;
+import com.media_collection.backend.domain.*;
 import com.media_collection.backend.mapper.UserMapper;
-import com.media_collection.backend.service.MovieCollectionService;
-import com.media_collection.backend.service.SongCollectionService;
-import com.media_collection.backend.service.UserService;
+import com.media_collection.backend.service.*;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +38,22 @@ class UserControllerTest {
     @MockBean
     private MovieCollectionService movieCollectionService;
 
+    @MockBean
+    private SongService songService;
+
+    @MockBean
+    private MovieService movieService;
+
     @SpyBean
     private UserMapper userMapper;
 
     @SpyBean
     private SuggestionsFactory suggestionsFactory;
+
+    @SpyBean
+    private SongSuggester songSuggester;
+    @SpyBean
+    private MovieSuggester movieSuggester;
 
     @Test
     void shouldFetchEmptyUserList() throws Exception {
