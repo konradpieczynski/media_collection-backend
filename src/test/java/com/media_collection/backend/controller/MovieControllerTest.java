@@ -53,7 +53,7 @@ class MovieControllerTest {
     @Test
     void shouldFetchMovieList() throws Exception {
         // Given
-        List<Movie> movies = List.of(new Movie(1L, "Test movie", "Test author",new ArrayList<>()));
+        List<Movie> movies = List.of(new Movie(1L, "Test movie", 1999,new ArrayList<>()));
         when(movieService.getMovies()).thenReturn(movies);
 
         //When & Then
@@ -64,13 +64,13 @@ class MovieControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieTitle", Matchers.is("Test movie")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieAuthor", Matchers.is("Test author")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieYear", Matchers.is(1999)));
     }
 
     @Test
     void shouldFetchMovie() throws Exception {
         // Given
-        Movie movie = new Movie(1L, "Test movie", "Test author",new ArrayList<>());
+        Movie movie = new Movie(1L, "Test movie", 1999,new ArrayList<>());
         when(movieService.findMovieById(1L)).thenReturn(movie);
 
         //When & Then
@@ -80,7 +80,7 @@ class MovieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieTitle", Matchers.is("Test movie")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieAuthor", Matchers.is("Test author")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movieYear", Matchers.is(1999)));
     }
 
     @Test
@@ -97,8 +97,8 @@ class MovieControllerTest {
     @Test
     void shouldUpdateMovie() throws Exception {
         // Given
-        Movie movie = new Movie(1L, "Test movie", "Test author",new ArrayList<>());
-        MovieDto movieDto = new MovieDto(1L, "Test movie", "Test author");
+        Movie movie = new Movie(1L, "Test movie", 1999,new ArrayList<>());
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999);
         when(movieService.saveMovie(any(Movie.class))).thenReturn(movie);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
@@ -111,13 +111,13 @@ class MovieControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieTitle", Matchers.is("Test movie")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieAuthor", Matchers.is("Test author")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movieYear", Matchers.is(1999)));
     }
 
     @Test
     void shouldCreateMovie() throws Exception {
         // Given
-        MovieDto movieDto = new MovieDto(1L, "Test movie", "Test author");
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
         //When & Then

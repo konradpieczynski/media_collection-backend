@@ -22,7 +22,7 @@ public class Movie {
     private String movieTitle;
 
     @Column(name = "movie_author")
-    private String movieAuthor;
+    private int movieYear;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(
