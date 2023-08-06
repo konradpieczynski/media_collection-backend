@@ -8,6 +8,5 @@ import com.fasterxml.jackson.annotation.*;
         @JsonSubTypes.Type(value = MovieSuggestions.class, name = "movies")
 })
 public interface SuggestionsInterface {
-    String type = null;
     String getType();
 }
