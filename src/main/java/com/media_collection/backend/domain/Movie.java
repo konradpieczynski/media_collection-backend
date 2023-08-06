@@ -34,4 +34,22 @@ public class Movie {
     )
     @Builder.Default
     private List<MovieCollection> movieCollectionList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        if (movieYear != movie.movieYear) return false;
+        return movieTitle.equals(movie.movieTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = movieTitle.hashCode();
+        result = 31 * result + movieYear;
+        return result;
+    }
 }

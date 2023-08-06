@@ -17,10 +17,10 @@ public class StatisticsScheduler {
     private final SongService songService;
     private final SongCollectionService songCollectionService;
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void sendStatistics(){
         log.info(
-                "Statistics:\n"
+                "\nStatistics:\n"
                 + "Users: " + userService.getUsers().size() + "\n"
                         + "Movies: " + movieService.getMovies().size() + "\n"
                         + "Movie collections: " + movieCollectionService.getMovieCollections().size() + "\n"

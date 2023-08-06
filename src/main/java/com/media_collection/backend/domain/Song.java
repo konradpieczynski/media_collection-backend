@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,4 +35,22 @@ public class Song {
     )
     @Builder.Default
     private List<SongCollection> songCollectionList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Song song = (Song) o;
+
+        if (!Objects.equals(songTitle, song.songTitle)) return false;
+        return Objects.equals(songAuthor, song.songAuthor);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = songTitle != null ? songTitle.hashCode() : 0;
+        result = 31 * result + (songAuthor != null ? songAuthor.hashCode() : 0);
+        return result;
+    }
 }
