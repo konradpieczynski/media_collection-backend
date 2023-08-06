@@ -2,7 +2,6 @@ package com.media_collection.backend.mapper;
 
 import com.media_collection.backend.domain.AppleSongResponseDto;
 import com.media_collection.backend.domain.Song;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

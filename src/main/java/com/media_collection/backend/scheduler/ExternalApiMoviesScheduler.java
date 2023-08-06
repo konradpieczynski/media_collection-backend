@@ -1,7 +1,6 @@
 package com.media_collection.backend.scheduler;
 
 import com.media_collection.backend.domain.Movie;
-import com.media_collection.backend.external_api.rapidapi.applemarketingtools.AppleMarketingToolsClient;
 import com.media_collection.backend.external_api.rapidapi.moviesdatabase.MoviesDatabaseClient;
 import com.media_collection.backend.mapper.ExternalMovieMapper;
 import com.media_collection.backend.service.MovieService;
