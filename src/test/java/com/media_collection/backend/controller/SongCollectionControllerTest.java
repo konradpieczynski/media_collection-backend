@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -66,9 +67,9 @@ class SongCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
-        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
         List<SongCollection> songCollections = List.of(songCollection);
         when(songCollectionService.getSongCollections()).thenReturn(songCollections);
 
@@ -89,9 +90,9 @@ class SongCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
-        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
         when(songCollectionService.findSongCollectionById(1L)).thenReturn(songCollection);
 
         //When & Then
@@ -121,9 +122,9 @@ class SongCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
-        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
         SongCollectionDto songCollectionDto = new SongCollectionDto(1L, "Test user", "Test songCollection", new ArrayList<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);
@@ -149,8 +150,8 @@ class SongCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         SongCollectionDto songCollectionDto = new SongCollectionDto(1L, "Test user", "Test songCollection", new ArrayList<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);

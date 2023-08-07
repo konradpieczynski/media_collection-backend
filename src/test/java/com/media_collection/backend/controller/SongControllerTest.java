@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.media_collection.backend.domain.Song;
 import com.media_collection.backend.domain.SongDto;
 import com.media_collection.backend.mapper.SongMapper;
+import com.media_collection.backend.service.SongCollectionService;
 import com.media_collection.backend.service.SongService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -32,6 +34,9 @@ class SongControllerTest {
 
     @MockBean
     private SongService songService;
+
+    @MockBean
+    private SongCollectionService songCollectionService;
 
     @SpyBean
     private SongMapper songMapper;
@@ -53,7 +58,7 @@ class SongControllerTest {
     @Test
     void shouldFetchSongList() throws Exception {
         // Given
-        List<Song> songs = List.of(new Song(1L, "Test song", "Test author",new ArrayList<>()));
+        List<Song> songs = List.of(new Song(1L, "Test song", "Test author",new HashSet<>()));
         when(songService.getSongs()).thenReturn(songs);
 
         //When & Then
@@ -70,7 +75,7 @@ class SongControllerTest {
     @Test
     void shouldFetchSong() throws Exception {
         // Given
-        Song song = new Song(1L, "Test song", "Test author",new ArrayList<>());
+        Song song = new Song(1L, "Test song", "Test author",new HashSet<>());
         when(songService.findSongById(1L)).thenReturn(song);
 
         //When & Then
@@ -97,8 +102,8 @@ class SongControllerTest {
     @Test
     void shouldUpdateSong() throws Exception {
         // Given
-        Song song = new Song(1L, "Test song", "Test author",new ArrayList<>());
-        SongDto songDto = new SongDto(1L, "Test song", "Test author");
+        Song song = new Song(1L, "Test song", "Test author",new HashSet<>());
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
         when(songService.saveSong(any(Song.class))).thenReturn(song);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songDto);
@@ -117,7 +122,7 @@ class SongControllerTest {
     @Test
     void shouldCreateSong() throws Exception {
         // Given
-        SongDto songDto = new SongDto(1L, "Test song", "Test author");
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songDto);
         //When & Then

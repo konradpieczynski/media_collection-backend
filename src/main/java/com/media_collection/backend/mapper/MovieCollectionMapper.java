@@ -31,7 +31,7 @@ public class MovieCollectionMapper {
                                 return null;
                             }
                         })
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toSet()))
                 .build();
     }
 

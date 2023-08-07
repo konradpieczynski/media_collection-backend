@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.media_collection.backend.domain.Movie;
 import com.media_collection.backend.domain.MovieDto;
 import com.media_collection.backend.mapper.MovieMapper;
+import com.media_collection.backend.service.MovieCollectionService;
 import com.media_collection.backend.service.MovieService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -32,6 +34,9 @@ class MovieControllerTest {
 
     @MockBean
     private MovieService movieService;
+
+    @MockBean
+    private MovieCollectionService movieCollectionService;
 
     @SpyBean
     private MovieMapper movieMapper;
@@ -53,7 +58,7 @@ class MovieControllerTest {
     @Test
     void shouldFetchMovieList() throws Exception {
         // Given
-        List<Movie> movies = List.of(new Movie(1L, "Test movie", 1999,new ArrayList<>()));
+        List<Movie> movies = List.of(new Movie(1L, "Test movie", 1999,new HashSet<>()));
         when(movieService.getMovies()).thenReturn(movies);
 
         //When & Then
@@ -70,7 +75,7 @@ class MovieControllerTest {
     @Test
     void shouldFetchMovie() throws Exception {
         // Given
-        Movie movie = new Movie(1L, "Test movie", 1999,new ArrayList<>());
+        Movie movie = new Movie(1L, "Test movie", 1999,new HashSet<>());
         when(movieService.findMovieById(1L)).thenReturn(movie);
 
         //When & Then
@@ -97,8 +102,8 @@ class MovieControllerTest {
     @Test
     void shouldUpdateMovie() throws Exception {
         // Given
-        Movie movie = new Movie(1L, "Test movie", 1999,new ArrayList<>());
-        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999);
+        Movie movie = new Movie(1L, "Test movie", 1999,new HashSet<>());
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new ArrayList<>());
         when(movieService.saveMovie(any(Movie.class))).thenReturn(movie);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
@@ -117,7 +122,7 @@ class MovieControllerTest {
     @Test
     void shouldCreateMovie() throws Exception {
         // Given
-        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999);
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new ArrayList<>());
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
         //When & Then

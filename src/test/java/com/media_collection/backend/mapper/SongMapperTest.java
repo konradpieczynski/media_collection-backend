@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +22,7 @@ class SongMapperTest {
     @Test
     void mapToSong() {
         //GIVEN
-        SongDto songDto = new SongDto(1L, "Test song", "Test author");
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
 
         //WHEN
         Song song = songMapper.mapToSong(songDto);
@@ -34,7 +35,7 @@ class SongMapperTest {
     @Test
     void mapToSongDto() {
         //GIVEN
-        Song song = new Song(1L, "Test song", "Test author",new ArrayList<>());
+        Song song = new Song(1L, "Test song", "Test author",new HashSet<>());
 
         //WHEN
         SongDto songDto = songMapper.mapToSongDto(song);

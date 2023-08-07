@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserMapper {
@@ -32,7 +33,7 @@ public class UserMapper {
                                 return null;
                             }
                         })
-                        .toList()
+                        .collect(Collectors.toSet())
                 )
                 .songCollectionList(userDto.getSongCollectionList()
                         .stream()
@@ -43,7 +44,7 @@ public class UserMapper {
                                 return null;
                             }
                         })
-                        .toList()
+                        .collect(Collectors.toSet())
                 )
                 .suggestions(Suggestions.valueOf(userDto.getSuggestions().getType().toUpperCase()))
                 .build();

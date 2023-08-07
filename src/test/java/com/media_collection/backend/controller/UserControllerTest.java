@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -75,8 +76,8 @@ class UserControllerTest {
         List<User> users = List.of(new User(1L,
                 "Test user",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>()));
+                new HashSet<>(),
+                new HashSet<>()));
         when(userService.getUsers()).thenReturn(users);
 
         //When & Then
@@ -98,8 +99,8 @@ class UserControllerTest {
         User user = new User(1L,
                 "Test user",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         when(userService.findUserById(1L)).thenReturn(user);
 
         //When & Then
@@ -131,8 +132,8 @@ class UserControllerTest {
         User user = new User(1L,
                 "Test user",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         UserDto userDto = new UserDto(1L,
                 "Test user",
                 suggestionsFactory.makeSuggestions("songs"),

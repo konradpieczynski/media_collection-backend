@@ -4,7 +4,9 @@ import lombok.*;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,14 +27,14 @@ public class MovieCollection {
     @Column(name = "movie_collection_name")
     private String movieCollectionName;
 
-    @ManyToMany(mappedBy = "movieCollectionList", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "movieCollectionSet", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
-    private List<Movie> movieList = new ArrayList<>();
+    private Set<Movie> movieList = new HashSet<>();
     @PreRemove
     private void removeThisFromRelations() {
         user.getMovieCollectionList().remove(this);
         for (Movie movie : movieList) {
-            movie.getMovieCollectionList().remove(this);
+            movie.getMovieCollectionSet().remove(this);
         }
     }
 }

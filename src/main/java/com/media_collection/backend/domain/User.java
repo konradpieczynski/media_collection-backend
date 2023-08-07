@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,7 +35,7 @@ public class User {
             fetch = FetchType.LAZY
     )
     @Builder.Default
-    public List<SongCollection> songCollectionList = new ArrayList<>();
+    public Set<SongCollection> songCollectionList = new HashSet<>();
 
     @OneToMany(targetEntity = MovieCollection.class,
             mappedBy = "user",
@@ -41,5 +43,5 @@ public class User {
             fetch = FetchType.LAZY
     )
     @Builder.Default
-    public List<MovieCollection> movieCollectionList = new ArrayList<>();
+    public Set<MovieCollection> movieCollectionList = new HashSet<>();
 }

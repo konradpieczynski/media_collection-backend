@@ -31,7 +31,7 @@ public class SongCollectionMapper {
                                 return null;
                             }
                         })
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toSet()))
                 .build();
     }
 

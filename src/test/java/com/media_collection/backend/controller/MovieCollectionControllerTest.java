@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -66,9 +67,9 @@ class MovieCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
-        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
         List<MovieCollection> movieCollections = List.of(movieCollection);
         when(movieCollectionService.getMovieCollections()).thenReturn(movieCollections);
 
@@ -89,9 +90,9 @@ class MovieCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
-        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
         when(movieCollectionService.findMovieCollectionById(1L)).thenReturn(movieCollection);
 
         //When & Then
@@ -121,9 +122,9 @@ class MovieCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
-        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
         MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, "Test user", "Test movieCollection", new ArrayList<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);
@@ -149,8 +150,8 @@ class MovieCollectionControllerTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, "Test user", "Test movieCollection", new ArrayList<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);

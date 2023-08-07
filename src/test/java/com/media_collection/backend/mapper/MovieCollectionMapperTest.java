@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,8 +31,8 @@ class MovieCollectionMapperTest {
         User user = new User(1L,
                 "Test user",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);
         when(userService.findUserByUserName(movieCollectionDto.getUser())).thenReturn(userList);
@@ -49,9 +50,9 @@ class MovieCollectionMapperTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
-        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
 
         //WHEN
         MovieCollectionDto movieCollectionDto = movieCollectionMapper.mapToMovieCollectionDto(movieCollection);
@@ -67,8 +68,8 @@ class MovieCollectionMapperTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.MOVIES,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         MovieCollection movieCollection1 = new MovieCollection();
         movieCollection1.setMovieCollectionId(1L);
         movieCollection1.setMovieCollectionName("Test movieCollection");

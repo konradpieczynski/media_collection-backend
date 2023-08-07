@@ -7,7 +7,9 @@ import com.media_collection.backend.mapper.ExternalMovieMapper;
 import com.media_collection.backend.mapper.ExternalSongMapper;
 import com.media_collection.backend.mapper.MovieMapper;
 import com.media_collection.backend.mapper.SongMapper;
+import com.media_collection.backend.service.MovieCollectionService;
 import com.media_collection.backend.service.MovieService;
+import com.media_collection.backend.service.SongCollectionService;
 import com.media_collection.backend.service.SongService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -38,6 +40,7 @@ class ExternalApiFeedTestControllerTest {
     @SpyBean
     private SongMapper songMapper;
 
+
     @SpyBean
     private ExternalMovieMapper externalMovieMapper;
 
@@ -54,7 +57,13 @@ class ExternalApiFeedTestControllerTest {
     private SongService songService;
 
     @MockBean
+    private SongCollectionService songCollectionService;
+
+    @MockBean
     private MovieService movieService;
+
+    @MockBean
+    private MovieCollectionService movieCollectionService;
 
     @Test
     void shouldFetchSongDto() throws Exception {

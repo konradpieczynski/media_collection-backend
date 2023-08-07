@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,8 +31,8 @@ class SongCollectionMapperTest {
         User user = new User(1L,
                 "Test user",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         List<User> userList = new ArrayList<>();
         userList.add(user);
         when(userService.findUserByUserName(songCollectionDto.getUser())).thenReturn(userList);
@@ -49,9 +50,9 @@ class SongCollectionMapperTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
-        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
+        SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
 
         //WHEN
         SongCollectionDto songCollectionDto = songCollectionMapper.mapToSongCollectionDto(songCollection);
@@ -67,8 +68,8 @@ class SongCollectionMapperTest {
         User user = new User(1L,
                 "Test User",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         SongCollection songCollection1 = new SongCollection();
         songCollection1.setSongCollectionId(1L);
         songCollection1.setSongCollectionName("Test songCollection");

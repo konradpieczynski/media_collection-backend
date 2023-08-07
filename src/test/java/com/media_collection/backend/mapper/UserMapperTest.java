@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,8 +45,8 @@ class UserMapperTest {
         User user = new User(1L,
                 "Test UserDto",
                 Suggestions.SONGS,
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
 
         //WHEN
         UserDto userDto = userMapper.mapToUserDto(user);
@@ -64,14 +65,14 @@ class UserMapperTest {
         user1.setUserId(1L);
         user1.setUserName("Test user");
         user1.setSuggestions(Suggestions.MOVIES);
-        user1.setMovieCollectionList(new ArrayList<>());
-        user1.setSongCollectionList(new ArrayList<>());
+        user1.setMovieCollectionList(new HashSet<>());
+        user1.setSongCollectionList(new HashSet<>());
         User user2 = new User();
         user2.setUserId(2L);
         user2.setUserName("Test user2");
         user2.setSuggestions(Suggestions.MOVIES);
-        user2.setMovieCollectionList(new ArrayList<>());
-        user2.setSongCollectionList(new ArrayList<>());
+        user2.setMovieCollectionList(new HashSet<>());
+        user2.setSongCollectionList(new HashSet<>());
         //WHEN
         List<UserDto> userDtoList = userMapper.mapToUserDtoList(List.of(user1,user2));
         //THEN
