@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,7 +27,7 @@ class SongCollectionMapperTest {
     @Test
     void mapToSongCollection() throws UserNotFoundException {
         //GIVEN
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new HashSet<>());
         User user = new User(1L,
                 "Test user",
                 Suggestions.SONGS,

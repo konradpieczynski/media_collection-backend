@@ -41,7 +41,7 @@ public class SongCollectionMapper {
                 .songCollectionId(songCollection.getSongCollectionId())
                 .userId(songCollection.getUser().getUserId())
                 .songCollectionName(songCollection.getSongCollectionName())
-                .songs(songCollection.getSongs().stream().map(Song::getSongId).collect(Collectors.toList()))
+                .songs(songCollection.getSongs().stream().map(Song::getSongId).collect(Collectors.toSet()))
                 .build();
     }
 

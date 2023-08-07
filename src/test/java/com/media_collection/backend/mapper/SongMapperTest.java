@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -22,7 +21,7 @@ class SongMapperTest {
     @Test
     void mapToSong() {
         //GIVEN
-        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new HashSet<>());
 
         //WHEN
         Song song = songMapper.mapToSong(songDto);

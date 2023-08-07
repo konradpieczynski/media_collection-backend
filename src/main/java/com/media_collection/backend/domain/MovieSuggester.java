@@ -5,8 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Random;
 
 @Component
@@ -15,8 +16,8 @@ public class MovieSuggester {
 
     @Autowired
     private final MovieService movieService;
-    List<Movie> makeSuggestions(){
-        List<Movie> suggestions = new ArrayList<>();
+    Set<Movie> makeSuggestions(){
+        Set<Movie> suggestions = new HashSet<>();
         List<Movie> movies = movieService.getMovies();
         if (!movies.isEmpty()) {
             Random random = new Random();

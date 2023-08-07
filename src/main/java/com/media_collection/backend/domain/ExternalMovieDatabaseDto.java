@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -16,5 +16,5 @@ public class ExternalMovieDatabaseDto {
     @JsonProperty("entries")
     String entries;
     @JsonProperty("results")
-    List<ExternalMovieDatabaseResultsDto> results;
+    Set<ExternalMovieDatabaseResultsDto> results;
 }

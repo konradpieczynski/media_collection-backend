@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -137,8 +136,8 @@ class UserControllerTest {
         UserDto userDto = new UserDto(1L,
                 "Test user",
                 suggestionsFactory.makeSuggestions("songs"),
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         when(userService.saveUser(any(User.class))).thenReturn(user);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(userDto);
@@ -162,8 +161,8 @@ class UserControllerTest {
         UserDto userDto = new UserDto(1L,
                 "Test user",
                 suggestionsFactory.makeSuggestions("songs"),
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
         Gson gson = new Gson();
         String jsonContent = gson.toJson(userDto);
         //When & Then

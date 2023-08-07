@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -20,7 +21,7 @@ class ExternalSongMapperTest {
     @Test
     void mapToSongList() {
         //GIVEN
-        List<AppleSongFeedResultsDto> feed = new ArrayList<>();
+        Set<AppleSongFeedResultsDto> feed = new HashSet<>();
         feed.add(new AppleSongFeedResultsDto("test artists","test song"));
         AppleSongFeedDto resultDtos = new AppleSongFeedDto(feed);
         AppleSongResponseDto appleSongResponseDto = new AppleSongResponseDto(resultDtos);

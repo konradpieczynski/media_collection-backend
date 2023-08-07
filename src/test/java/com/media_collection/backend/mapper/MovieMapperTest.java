@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -22,7 +21,7 @@ class MovieMapperTest {
     @Test
     void mapToMovie() {
         //GIVEN
-        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new ArrayList<>());
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new HashSet<>());
 
         //WHEN
         Movie movie = movieMapper.mapToMovie(movieDto);

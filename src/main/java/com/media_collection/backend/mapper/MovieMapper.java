@@ -43,7 +43,7 @@ public class MovieMapper {
                 .movieCollectionList(movie.getMovieCollections()
                         .stream()
                         .map(MovieCollection::getMovieCollectionId)
-                        .toList()
+                        .collect(Collectors.toSet())
                 )
                 .build();
     }

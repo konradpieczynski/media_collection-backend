@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -13,9 +13,9 @@ import java.util.List;
 public class SongSuggestions implements SuggestionsInterface{
     @JsonTypeId
     private final String type = Suggestions.SONGS.getValue();
-    List<Song> suggestedSongs;
+    Set<Song> suggestedSongs;
 
-    public SongSuggestions(List<Song> suggestedSongs) {
+    public SongSuggestions(Set<Song> suggestedSongs) {
         this.suggestedSongs = suggestedSongs;
     }
 }

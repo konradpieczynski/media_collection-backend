@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -125,7 +124,7 @@ class SongCollectionControllerTest {
                 new HashSet<>(),
                 new HashSet<>());
         SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new HashSet<>());
         when(userService.findUserById(songCollectionDto.getUserId())).thenReturn(user);
         when(songCollectionService.saveSongCollection(any(SongCollection.class))).thenReturn(songCollection);
         Gson gson = new Gson();
@@ -150,7 +149,7 @@ class SongCollectionControllerTest {
                 Suggestions.SONGS,
                 new HashSet<>(),
                 new HashSet<>());
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new HashSet<>());
         when(userService.findUserById(songCollectionDto.getUserId())).thenReturn(user);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songCollectionDto);

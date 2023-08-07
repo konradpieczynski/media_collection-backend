@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -16,6 +16,8 @@ public class UserDto {
     private Long userId;
     private String userName;
     private SuggestionsInterface suggestions;
-    private List<Long> movieCollectionList = new ArrayList<>();
-    private List<Long> songCollectionList = new ArrayList<>();
+    @Builder.Default
+    private Set<Long> movieCollectionList = new HashSet<>();
+    @Builder.Default
+    private Set<Long> songCollectionList = new HashSet<>();
 }

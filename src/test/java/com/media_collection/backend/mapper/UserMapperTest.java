@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,8 +25,8 @@ class UserMapperTest {
         UserDto userDto = new UserDto(1L,
                 "Test user",
                 suggestionsFactory.makeSuggestions("songs"),
-                new ArrayList<>(),
-                new ArrayList<>());
+                new HashSet<>(),
+                new HashSet<>());
 
         //WHEN
         User user = userMapper.mapToUser(userDto);

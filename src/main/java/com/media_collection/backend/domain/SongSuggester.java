@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -15,8 +13,8 @@ public class SongSuggester {
 
     @Autowired
     private final SongService songService;
-    List<Song> makeSuggestions(){
-        List<Song> suggestions = new ArrayList<>();
+    Set<Song> makeSuggestions(){
+        Set<Song> suggestions = new HashSet<>();
         List<Song> songs = songService.getSongs();
         if (!songs.isEmpty()) {
             Random random = new Random();

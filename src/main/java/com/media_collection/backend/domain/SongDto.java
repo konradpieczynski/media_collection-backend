@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -16,5 +16,6 @@ public class SongDto {
     private Long songId;
     private String songTitle;
     private String songAuthor;
-    private List<Long> songCollections = new ArrayList<>();
+    @Builder.Default
+    private Set<Long> songCollections = new HashSet<>();
 }

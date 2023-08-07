@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -103,7 +102,7 @@ class MovieControllerTest {
     void shouldUpdateMovie() throws Exception {
         // Given
         Movie movie = new Movie(1L, "Test movie", 1999,new HashSet<>());
-        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new ArrayList<>());
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new HashSet<>());
         when(movieService.saveMovie(any(Movie.class))).thenReturn(movie);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
@@ -122,7 +121,7 @@ class MovieControllerTest {
     @Test
     void shouldCreateMovie() throws Exception {
         // Given
-        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new ArrayList<>());
+        MovieDto movieDto = new MovieDto(1L, "Test movie", 1999, new HashSet<>());
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieDto);
         //When & Then

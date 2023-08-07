@@ -23,8 +23,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
@@ -68,7 +68,7 @@ class ExternalApiFeedTestControllerTest {
     @Test
     void shouldFetchSongDto() throws Exception {
         // Given
-        List<AppleSongFeedResultsDto> appleSongFeedResultsDtos = new ArrayList<>();
+        Set<AppleSongFeedResultsDto> appleSongFeedResultsDtos = new HashSet<>();
         appleSongFeedResultsDtos.add(new AppleSongFeedResultsDto("test artist", "test name"));
         AppleSongFeedDto appleSongFeedDto = new AppleSongFeedDto(appleSongFeedResultsDtos);
         AppleSongResponseDto appleSongResponseDto = new AppleSongResponseDto(appleSongFeedDto);
@@ -84,7 +84,7 @@ class ExternalApiFeedTestControllerTest {
     @Test
     void shouldFetchMovieDto() throws Exception {
         // Given
-        List<ExternalMovieDatabaseResultsDto> resultsDtoList = new ArrayList<>();
+        Set<ExternalMovieDatabaseResultsDto> resultsDtoList = new HashSet<>();
         resultsDtoList.add(
                 new ExternalMovieDatabaseResultsDto(
                         new ExternalMovieDatabaseResultsOriginalTitleTextDto("test title"),

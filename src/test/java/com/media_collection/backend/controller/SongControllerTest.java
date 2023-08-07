@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -103,7 +102,7 @@ class SongControllerTest {
     void shouldUpdateSong() throws Exception {
         // Given
         Song song = new Song(1L, "Test song", "Test author",new HashSet<>());
-        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new HashSet<>());
         when(songService.saveSong(any(Song.class))).thenReturn(song);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songDto);
@@ -122,7 +121,7 @@ class SongControllerTest {
     @Test
     void shouldCreateSong() throws Exception {
         // Given
-        SongDto songDto = new SongDto(1L, "Test song", "Test author", new ArrayList<>());
+        SongDto songDto = new SongDto(1L, "Test song", "Test author", new HashSet<>());
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songDto);
         //When & Then

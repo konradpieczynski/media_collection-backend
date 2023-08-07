@@ -58,11 +58,11 @@ public class UserMapper {
                 .movieCollectionList(user.getMovieCollectionList()
                                 .stream()
                                 .map(MovieCollection::getMovieCollectionId)
-                                .toList())
+                                .collect(Collectors.toSet()))
                 .songCollectionList(user.getSongCollectionList()
                         .stream()
                         .map(SongCollection::getSongCollectionId)
-                        .toList())
+                        .collect(Collectors.toSet()))
                 .build();
     }
     public List<UserDto> mapToUserDtoList(final List<User> userList) {

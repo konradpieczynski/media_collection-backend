@@ -43,7 +43,7 @@ public class SongMapper {
                 .songCollections(song.getSongCollections()
                         .stream()
                         .map(SongCollection::getSongCollectionId)
-                        .toList()
+                        .collect(Collectors.toSet())
                 )
                 .build();
     }

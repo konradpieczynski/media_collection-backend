@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -125,7 +124,7 @@ class MovieCollectionControllerTest {
                 new HashSet<>(),
                 new HashSet<>());
         MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
-        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new ArrayList<>());
+        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new HashSet<>());
         when(userService.findUserById(movieCollectionDto.getUserId())).thenReturn(user);
         when(movieCollectionService.saveMovieCollection(any(MovieCollection.class))).thenReturn(movieCollection);
         Gson gson = new Gson();
@@ -150,7 +149,7 @@ class MovieCollectionControllerTest {
                 Suggestions.MOVIES,
                 new HashSet<>(),
                 new HashSet<>());
-        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new ArrayList<>());
+        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new HashSet<>());
         when(userService.findUserById(movieCollectionDto.getUserId())).thenReturn(user);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieCollectionDto);
