@@ -1,6 +1,7 @@
 package com.media_collection.backend.mapper;
 
 import com.media_collection.backend.controller.exceptions.MovieNotFoundException;
+import com.media_collection.backend.controller.exceptions.UserNotFoundException;
 import com.media_collection.backend.domain.*;
 import com.media_collection.backend.service.MovieService;
 import com.media_collection.backend.service.UserService;
@@ -17,12 +18,12 @@ public class MovieCollectionMapper {
     MovieService movieService;
     @Autowired
     UserService userService;
-    public MovieCollection mapToMovieCollection(final MovieCollectionDto movieCollectionDto) {
+    public MovieCollection mapToMovieCollection(final MovieCollectionDto movieCollectionDto) throws UserNotFoundException {
         return MovieCollection.builder()
                 .movieCollectionId(movieCollectionDto.getMovieCollectionId())
                 .movieCollectionName(movieCollectionDto.getMovieCollectionName())
-                .user(userService.findUserByUserName(movieCollectionDto.getUser()).get(0))
-                .movieList(movieCollectionDto.getMovieCollectionList()
+                .user(userService.findUserById(movieCollectionDto.getUserId()))
+                .movies(movieCollectionDto.getMovieCollections()
                         .stream()
                         .map(movieId -> {
                             try {
@@ -38,9 +39,9 @@ public class MovieCollectionMapper {
     public MovieCollectionDto mapToMovieCollectionDto(final MovieCollection movieCollection) {
         return MovieCollectionDto.builder()
                 .movieCollectionId(movieCollection.getMovieCollectionId())
-                .user(movieCollection.getUser().getUserName())
+                .userId(movieCollection.getUser().getUserId())
                 .movieCollectionName(movieCollection.getMovieCollectionName())
-                .movieCollectionList(movieCollection.getMovieList().stream().map(Movie::getMovieId).collect(Collectors.toList()))
+                .movieCollections(movieCollection.getMovies().stream().map(Movie::getMovieId).collect(Collectors.toList()))
                 .build();
     }
 

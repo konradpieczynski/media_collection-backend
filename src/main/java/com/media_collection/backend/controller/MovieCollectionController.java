@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.MovieCollectionNotFoundException;
+import com.media_collection.backend.controller.exceptions.UserNotFoundException;
 import com.media_collection.backend.domain.MovieCollection;
 import com.media_collection.backend.domain.MovieCollectionDto;
 import com.media_collection.backend.mapper.MovieCollectionMapper;
@@ -31,13 +32,13 @@ public class MovieCollectionController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
+    public ResponseEntity<Void> createMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) throws UserNotFoundException {
         movieCollectionService.saveMovieCollection(movieCollectionMapper.mapToMovieCollection(movieCollectionDto));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<MovieCollectionDto> updateMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) {
+    public ResponseEntity<MovieCollectionDto> updateMovieCollection(@RequestBody MovieCollectionDto movieCollectionDto) throws UserNotFoundException {
         MovieCollection movieCollection = movieCollectionMapper.mapToMovieCollection(movieCollectionDto);
         MovieCollection savedMovieCollection = movieCollectionService.saveMovieCollection(movieCollection);
         return ResponseEntity.ok(movieCollectionMapper.mapToMovieCollectionDto(savedMovieCollection));

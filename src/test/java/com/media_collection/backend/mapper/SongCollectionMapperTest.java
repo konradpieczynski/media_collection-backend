@@ -1,5 +1,6 @@
 package com.media_collection.backend.mapper;
 
+import com.media_collection.backend.controller.exceptions.UserNotFoundException;
 import com.media_collection.backend.domain.*;
 import com.media_collection.backend.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -25,17 +26,15 @@ class SongCollectionMapperTest {
     @MockBean
     private UserService userService;
     @Test
-    void mapToSongCollection() {
+    void mapToSongCollection() throws UserNotFoundException {
         //GIVEN
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, "Test user", "Test songCollection", new ArrayList<>());
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
         User user = new User(1L,
                 "Test user",
                 Suggestions.SONGS,
                 new HashSet<>(),
                 new HashSet<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-        when(userService.findUserByUserName(songCollectionDto.getUser())).thenReturn(userList);
+        when(userService.findUserById(songCollectionDto.getUserId())).thenReturn(user);
         //WHEN
         SongCollection songCollection = songCollectionMapper.mapToSongCollection(songCollectionDto);
         //THEN
@@ -59,7 +58,7 @@ class SongCollectionMapperTest {
         //THEN
         assertEquals(1L, songCollectionDto.getSongCollectionId());
         assertEquals("Test songCollection", songCollectionDto.getSongCollectionName());
-        assertEquals("Test User", songCollectionDto.getUser());
+        assertEquals(1L, songCollectionDto.getUserId());
     }
 
     @Test

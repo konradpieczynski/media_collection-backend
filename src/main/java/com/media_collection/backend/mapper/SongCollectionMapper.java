@@ -1,6 +1,7 @@
 package com.media_collection.backend.mapper;
 
 import com.media_collection.backend.controller.exceptions.SongNotFoundException;
+import com.media_collection.backend.controller.exceptions.UserNotFoundException;
 import com.media_collection.backend.domain.*;
 import com.media_collection.backend.service.SongService;
 import com.media_collection.backend.service.UserService;
@@ -17,12 +18,12 @@ public class SongCollectionMapper {
     SongService songService;
     @Autowired
     UserService userService;
-    public SongCollection mapToSongCollection(final SongCollectionDto songCollectionDto) {
+    public SongCollection mapToSongCollection(final SongCollectionDto songCollectionDto) throws UserNotFoundException {
         return SongCollection.builder()
                 .songCollectionId(songCollectionDto.getSongCollectionId())
                 .songCollectionName(songCollectionDto.getSongCollectionName())
-                .user(userService.findUserByUserName(songCollectionDto.getUser()).get(0))
-                .songList(songCollectionDto.getSongCollectionList()
+                .user(userService.findUserById(songCollectionDto.getUserId()))
+                .songs(songCollectionDto.getSongs()
                         .stream()
                         .map(songId -> {
                             try {
@@ -38,9 +39,9 @@ public class SongCollectionMapper {
     public SongCollectionDto mapToSongCollectionDto(final SongCollection songCollection) {
         return SongCollectionDto.builder()
                 .songCollectionId(songCollection.getSongCollectionId())
-                .user(songCollection.getUser().getUserName())
+                .userId(songCollection.getUser().getUserId())
                 .songCollectionName(songCollection.getSongCollectionName())
-                .songCollectionList(songCollection.getSongList().stream().map(Song::getSongId).collect(Collectors.toList()))
+                .songs(songCollection.getSongs().stream().map(Song::getSongId).collect(Collectors.toList()))
                 .build();
     }
 

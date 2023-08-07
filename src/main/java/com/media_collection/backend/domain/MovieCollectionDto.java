@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MovieCollectionDto {
     private Long movieCollectionId;
-    private String user;
+    private Long userId;
     private String movieCollectionName;
-    private List<Long> movieCollectionList = new ArrayList<>();
+    private List<Long> movieCollections = new ArrayList<>();
 }

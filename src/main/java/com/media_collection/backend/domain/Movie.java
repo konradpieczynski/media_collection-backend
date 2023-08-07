@@ -3,9 +3,8 @@ package com.media_collection.backend.domain;
 import lombok.*;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -35,7 +34,7 @@ public class Movie {
                     @JoinColumn(name = "movie_collection_id", referencedColumnName = "movie_collection_id")}
     )
     @Builder.Default
-    private Set<MovieCollection> movieCollectionSet = new HashSet<>();
+    private Set<MovieCollection> movieCollections = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

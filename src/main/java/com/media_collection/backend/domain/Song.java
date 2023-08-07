@@ -33,7 +33,7 @@ public class Song {
                     @JoinColumn(name = "song_collection_id", referencedColumnName = "song_collection_id")}
     )
     @Builder.Default
-    private Set<SongCollection> songCollectionSet = new HashSet<>();
+    private Set<SongCollection> songCollections = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

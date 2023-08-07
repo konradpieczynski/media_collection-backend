@@ -22,7 +22,7 @@ public class SongMapper {
                 .songId(songDto.getSongId())
                 .songTitle(songDto.getSongTitle())
                 .songAuthor(songDto.getSongAuthor())
-                .songCollectionSet(songDto.getSongCollectionList()
+                .songCollections(songDto.getSongCollections()
                         .stream()
                         .map(id -> {
                             try {
@@ -40,7 +40,7 @@ public class SongMapper {
                 .songId(song.getSongId())
                 .songTitle(song.getSongTitle())
                 .songAuthor(song.getSongAuthor())
-                .songCollectionList(song.getSongCollectionSet()
+                .songCollections(song.getSongCollections()
                         .stream()
                         .map(SongCollection::getSongCollectionId)
                         .toList()

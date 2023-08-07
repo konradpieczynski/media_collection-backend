@@ -1,6 +1,7 @@
 package com.media_collection.backend.controller;
 
 import com.media_collection.backend.controller.exceptions.SongCollectionNotFoundException;
+import com.media_collection.backend.controller.exceptions.UserNotFoundException;
 import com.media_collection.backend.domain.SongCollection;
 import com.media_collection.backend.domain.SongCollectionDto;
 import com.media_collection.backend.mapper.SongCollectionMapper;
@@ -31,13 +32,13 @@ public class SongCollectionController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSongCollection(@RequestBody SongCollectionDto songCollectionDto) {
+    public ResponseEntity<Void> createSongCollection(@RequestBody SongCollectionDto songCollectionDto) throws UserNotFoundException {
         songCollectionService.saveSongCollection(songCollectionMapper.mapToSongCollection(songCollectionDto));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<SongCollectionDto> updateSongCollection(@RequestBody SongCollectionDto songCollectionDto) {
+    public ResponseEntity<SongCollectionDto> updateSongCollection(@RequestBody SongCollectionDto songCollectionDto) throws UserNotFoundException {
         SongCollection songCollection = songCollectionMapper.mapToSongCollection(songCollectionDto);
         SongCollection savedSongCollection = songCollectionService.saveSongCollection(songCollection);
         return ResponseEntity.ok(songCollectionMapper.mapToSongCollectionDto(savedSongCollection));

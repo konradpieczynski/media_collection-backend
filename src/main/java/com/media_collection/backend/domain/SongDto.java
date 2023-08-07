@@ -16,5 +16,5 @@ public class SongDto {
     private Long songId;
     private String songTitle;
     private String songAuthor;
-    private List<Long> songCollectionList = new ArrayList<>();
+    private List<Long> songCollections = new ArrayList<>();
 }

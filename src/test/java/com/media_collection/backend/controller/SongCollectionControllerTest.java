@@ -81,7 +81,7 @@ class SongCollectionControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].songCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].songCollectionName", Matchers.is("Test songCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].songCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].songs", Matchers.hasSize(0)));
     }
 
     @Test
@@ -102,7 +102,7 @@ class SongCollectionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionName", Matchers.is("Test songCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.songs", Matchers.hasSize(0)));
     }
 
     @Test
@@ -125,10 +125,8 @@ class SongCollectionControllerTest {
                 new HashSet<>(),
                 new HashSet<>());
         SongCollection songCollection = new SongCollection(1L, user, "Test songCollection",new HashSet<>());
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, "Test user", "Test songCollection", new ArrayList<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-        when(userService.findUserByUserName(songCollectionDto.getUser())).thenReturn(userList);
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
+        when(userService.findUserById(songCollectionDto.getUserId())).thenReturn(user);
         when(songCollectionService.saveSongCollection(any(SongCollection.class))).thenReturn(songCollection);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songCollectionDto);
@@ -141,7 +139,7 @@ class SongCollectionControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionName", Matchers.is("Test songCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.songCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.songs", Matchers.hasSize(0)));
     }
 
     @Test
@@ -152,10 +150,8 @@ class SongCollectionControllerTest {
                 Suggestions.SONGS,
                 new HashSet<>(),
                 new HashSet<>());
-        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, "Test user", "Test songCollection", new ArrayList<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-        when(userService.findUserByUserName(songCollectionDto.getUser())).thenReturn(userList);
+        SongCollectionDto songCollectionDto = new SongCollectionDto(1L, 1L, "Test songCollection", new ArrayList<>());
+        when(userService.findUserById(songCollectionDto.getUserId())).thenReturn(user);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(songCollectionDto);
         //When & Then

@@ -22,7 +22,7 @@ public class MovieMapper {
                 .movieId(movieDto.getMovieId())
                 .movieTitle(movieDto.getMovieTitle())
                 .movieYear(movieDto.getMovieYear())
-                .movieCollectionSet(movieDto.getMovieCollectionList()
+                .movieCollections(movieDto.getMovieCollectionList()
                         .stream()
                         .map(id -> {
                             try {
@@ -40,7 +40,7 @@ public class MovieMapper {
                 .movieId(movie.getMovieId())
                 .movieTitle(movie.getMovieTitle())
                 .movieYear(movie.getMovieYear())
-                .movieCollectionList(movie.getMovieCollectionSet()
+                .movieCollectionList(movie.getMovieCollections()
                         .stream()
                         .map(MovieCollection::getMovieCollectionId)
                         .toList()

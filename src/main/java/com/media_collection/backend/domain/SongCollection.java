@@ -26,15 +26,15 @@ public class SongCollection {
     @Column(name = "collection_name")
     private String songCollectionName;
 
-    @ManyToMany(mappedBy = "songCollectionSet", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "songCollections", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<Song> songList = new HashSet<>();
+    private Set<Song> songs = new HashSet<>();
 
     @PreRemove
     private void removeThisFromRelations() {
         user.getSongCollectionList().remove(this);
-        for (Song song : songList) {
-            song.getSongCollectionSet().remove(this);
+        for (Song song : songs) {
+            song.getSongCollections().remove(this);
         }
     }
 }

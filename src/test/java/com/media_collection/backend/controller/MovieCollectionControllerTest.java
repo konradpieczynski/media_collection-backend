@@ -81,7 +81,7 @@ class MovieCollectionControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollections", Matchers.hasSize(0)));
     }
 
     @Test
@@ -102,7 +102,7 @@ class MovieCollectionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollections", Matchers.hasSize(0)));
     }
 
     @Test
@@ -125,10 +125,8 @@ class MovieCollectionControllerTest {
                 new HashSet<>(),
                 new HashSet<>());
         MovieCollection movieCollection = new MovieCollection(1L, user, "Test movieCollection",new HashSet<>());
-        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, "Test user", "Test movieCollection", new ArrayList<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-        when(userService.findUserByUserName(movieCollectionDto.getUser())).thenReturn(userList);
+        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new ArrayList<>());
+        when(userService.findUserById(movieCollectionDto.getUserId())).thenReturn(user);
         when(movieCollectionService.saveMovieCollection(any(MovieCollection.class))).thenReturn(movieCollection);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieCollectionDto);
@@ -141,7 +139,7 @@ class MovieCollectionControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionList", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollections", Matchers.hasSize(0)));
     }
 
     @Test
@@ -152,10 +150,8 @@ class MovieCollectionControllerTest {
                 Suggestions.MOVIES,
                 new HashSet<>(),
                 new HashSet<>());
-        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, "Test user", "Test movieCollection", new ArrayList<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-        when(userService.findUserByUserName(movieCollectionDto.getUser())).thenReturn(userList);
+        MovieCollectionDto movieCollectionDto = new MovieCollectionDto(1L, 1L, "Test movieCollection", new ArrayList<>());
+        when(userService.findUserById(movieCollectionDto.getUserId())).thenReturn(user);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(movieCollectionDto);
         //When & Then
