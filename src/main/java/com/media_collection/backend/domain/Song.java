@@ -48,4 +48,11 @@ public class Song {
         result = 31 * result + (songAuthor != null ? songAuthor.hashCode() : 0);
         return result;
     }
+
+    @PreRemove
+    private void removeThisFromRelations() {
+        for (SongCollection songCollection : songCollections) {
+            songCollection.getSongs().remove(this);
+        }
+    }
 }

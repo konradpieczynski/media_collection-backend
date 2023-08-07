@@ -49,4 +49,11 @@ public class Movie {
         result = 31 * result + movieYear;
         return result;
     }
+
+    @PreRemove
+    private void removeThisFromRelations() {
+        for (MovieCollection movieCollection : movieCollections) {
+            movieCollection.getMovies().remove(this);
+        }
+    }
 }
