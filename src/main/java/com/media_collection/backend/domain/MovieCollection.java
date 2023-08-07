@@ -26,7 +26,14 @@ public class MovieCollection {
     @Column(name = "movie_collection_name")
     private String movieCollectionName;
 
-    @ManyToMany(mappedBy = "movieCollections", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "join_movie_collection",
+            joinColumns = {
+                    @JoinColumn(name = "movie_collection_id", referencedColumnName = "movie_collection_id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")}
+    )
     @Builder.Default
     private Set<Movie> movies = new HashSet<>();
     @PreRemove

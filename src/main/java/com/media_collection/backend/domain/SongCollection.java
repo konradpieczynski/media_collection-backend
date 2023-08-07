@@ -26,7 +26,14 @@ public class SongCollection {
     @Column(name = "collection_name")
     private String songCollectionName;
 
-    @ManyToMany(mappedBy = "songCollections", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "join_song_collection",
+            joinColumns = {
+                    @JoinColumn(name = "song_collection_id", referencedColumnName = "song_collection_id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "song_id", referencedColumnName = "song_id")}
+    )
     @Builder.Default
     private Set<Song> songs = new HashSet<>();
 

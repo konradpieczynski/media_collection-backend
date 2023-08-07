@@ -24,14 +24,8 @@ public class Song {
     @Column(name = "song_author")
     private String songAuthor;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "join_song_collection",
-            joinColumns = {
-                    @JoinColumn(name = "song_id", referencedColumnName = "song_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "song_collection_id", referencedColumnName = "song_collection_id")}
-    )
+
+    @ManyToMany(mappedBy = "songs", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<SongCollection> songCollections = new HashSet<>();
 

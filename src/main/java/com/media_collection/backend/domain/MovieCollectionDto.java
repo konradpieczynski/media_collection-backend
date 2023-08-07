@@ -16,5 +16,5 @@ public class MovieCollectionDto {
     private Long movieCollectionId;
     private Long userId;
     private String movieCollectionName;
-    private List<Long> movieCollections = new ArrayList<>();
+    private List<Long> movies = new ArrayList<>();
 }

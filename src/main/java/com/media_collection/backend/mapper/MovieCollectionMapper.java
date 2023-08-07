@@ -23,7 +23,7 @@ public class MovieCollectionMapper {
                 .movieCollectionId(movieCollectionDto.getMovieCollectionId())
                 .movieCollectionName(movieCollectionDto.getMovieCollectionName())
                 .user(userService.findUserById(movieCollectionDto.getUserId()))
-                .movies(movieCollectionDto.getMovieCollections()
+                .movies(movieCollectionDto.getMovies()
                         .stream()
                         .map(movieId -> {
                             try {
@@ -41,7 +41,7 @@ public class MovieCollectionMapper {
                 .movieCollectionId(movieCollection.getMovieCollectionId())
                 .userId(movieCollection.getUser().getUserId())
                 .movieCollectionName(movieCollection.getMovieCollectionName())
-                .movieCollections(movieCollection.getMovies().stream().map(Movie::getMovieId).collect(Collectors.toList()))
+                .movies(movieCollection.getMovies().stream().map(Movie::getMovieId).collect(Collectors.toList()))
                 .build();
     }
 

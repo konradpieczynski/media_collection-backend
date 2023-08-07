@@ -81,7 +81,7 @@ class MovieCollectionControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movieCollections", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].movies", Matchers.hasSize(0)));
     }
 
     @Test
@@ -102,7 +102,7 @@ class MovieCollectionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollections", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movies", Matchers.hasSize(0)));
     }
 
     @Test
@@ -139,7 +139,7 @@ class MovieCollectionControllerTest {
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollectionName", Matchers.is("Test movieCollection")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.movieCollections", Matchers.hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.movies", Matchers.hasSize(0)));
     }
 
     @Test

@@ -25,14 +25,8 @@ public class Movie {
     @Column(name = "movie_author")
     private int movieYear;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "join_movie_collection",
-            joinColumns = {
-                    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "movie_collection_id", referencedColumnName = "movie_collection_id")}
-    )
+
+    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<MovieCollection> movieCollections = new HashSet<>();
 
