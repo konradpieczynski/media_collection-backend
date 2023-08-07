@@ -1,5 +1,6 @@
 package com.media_collection.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -27,6 +28,7 @@ public class Song {
 
     @ManyToMany(mappedBy = "songs", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonIgnore
     private Set<SongCollection> songCollections = new HashSet<>();
 
     @Override
