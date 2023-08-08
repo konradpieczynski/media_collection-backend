@@ -1,5 +1,6 @@
 package com.media_collection.backend.service;
 
+import com.media_collection.backend.controller.exceptions.SongCollectionNotFoundException;
 import com.media_collection.backend.controller.exceptions.SongNotFoundException;
 import com.media_collection.backend.domain.Song;
 import com.media_collection.backend.repository.SongRepository;

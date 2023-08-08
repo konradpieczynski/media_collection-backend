@@ -31,7 +31,7 @@ public class User {
 
     @OneToMany(targetEntity = SongCollection.class,
             mappedBy = "user",
-            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @Builder.Default
