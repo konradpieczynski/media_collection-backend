@@ -27,7 +27,7 @@ public class Movie {
     private int movieYear;
 
 
-    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     @JsonIgnore
     private Set<MovieCollection> movieCollections = new HashSet<>();

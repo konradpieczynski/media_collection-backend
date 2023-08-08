@@ -26,7 +26,7 @@ public class Song {
     private String songAuthor;
 
 
-    @ManyToMany(mappedBy = "songs", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "songs", cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @Builder.Default
     @JsonIgnore
     private Set<SongCollection> songCollections = new HashSet<>();

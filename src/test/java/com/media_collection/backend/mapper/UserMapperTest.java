@@ -34,8 +34,8 @@ class UserMapperTest {
         assertEquals(1L, user.getUserId());
         assertEquals("songs", user.getSuggestions().getValue());
         assertEquals("Test user", user.getUserName());
-        assertEquals(0, user.getMovieCollectionList().size());
-        assertEquals(0, user.getSongCollectionList().size());
+        assertEquals(0, user.getMovieCollections().size());
+        assertEquals(0, user.getSongCollections().size());
     }
 
     @Test
@@ -64,14 +64,14 @@ class UserMapperTest {
         user1.setUserId(1L);
         user1.setUserName("Test user");
         user1.setSuggestions(Suggestions.MOVIES);
-        user1.setMovieCollectionList(new HashSet<>());
-        user1.setSongCollectionList(new HashSet<>());
+        user1.setMovieCollections(new HashSet<>());
+        user1.setSongCollections(new HashSet<>());
         User user2 = new User();
         user2.setUserId(2L);
         user2.setUserName("Test user2");
         user2.setSuggestions(Suggestions.MOVIES);
-        user2.setMovieCollectionList(new HashSet<>());
-        user2.setSongCollectionList(new HashSet<>());
+        user2.setMovieCollections(new HashSet<>());
+        user2.setSongCollections(new HashSet<>());
         //WHEN
         List<UserDto> userDtoList = userMapper.mapToUserDtoList(List.of(user1,user2));
         //THEN

@@ -24,7 +24,7 @@ public class UserMapper {
         return User.builder()
                 .userId(userDto.getUserId())
                 .userName(userDto.getUserName())
-                .movieCollectionList(userDto.getMovieCollectionList()
+                .movieCollections(userDto.getMovieCollectionList()
                         .stream()
                         .map(id -> {
                             try {
@@ -35,7 +35,7 @@ public class UserMapper {
                         })
                         .collect(Collectors.toSet())
                 )
-                .songCollectionList(userDto.getSongCollectionList()
+                .songCollections(userDto.getSongCollectionList()
                         .stream()
                         .map(id -> {
                             try {
@@ -55,11 +55,11 @@ public class UserMapper {
                 .userId(user.getUserId())
                 .userName(user.getUserName())
                 .suggestions(suggestionsFactory.makeSuggestions(user.getSuggestions().getValue()))
-                .movieCollectionList(user.getMovieCollectionList()
+                .movieCollectionList(user.getMovieCollections()
                                 .stream()
                                 .map(MovieCollection::getMovieCollectionId)
                                 .collect(Collectors.toSet()))
-                .songCollectionList(user.getSongCollectionList()
+                .songCollectionList(user.getSongCollections()
                         .stream()
                         .map(SongCollection::getSongCollectionId)
                         .collect(Collectors.toSet()))

@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @Entity(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -35,13 +35,26 @@ public class User {
             fetch = FetchType.LAZY
     )
     @Builder.Default
-    public Set<SongCollection> songCollectionList = new HashSet<>();
+    public Set<SongCollection> songCollections = new HashSet<>();
 
     @OneToMany(targetEntity = MovieCollection.class,
             mappedBy = "user",
-            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @Builder.Default
-    public Set<MovieCollection> movieCollectionList = new HashSet<>();
+    public Set<MovieCollection> movieCollections = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId);
+    }
 }

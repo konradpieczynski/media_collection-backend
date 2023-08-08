@@ -1,13 +1,8 @@
 package com.media_collection.backend.service;
 
-import com.media_collection.backend.controller.exceptions.SongCollectionNotFoundException;
-import com.media_collection.backend.controller.exceptions.SongNotFoundException;
-import com.media_collection.backend.domain.Song;
-import com.media_collection.backend.domain.SongCollection;
-import com.media_collection.backend.domain.User;
-import com.media_collection.backend.repository.SongCollectionRepository;
-import com.media_collection.backend.repository.SongRepository;
-import com.media_collection.backend.repository.UserRepository;
+import com.media_collection.backend.controller.exceptions.*;
+import com.media_collection.backend.domain.*;
+import com.media_collection.backend.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +25,22 @@ public class CascadeTest {
     SongCollectionRepository songCollectionRepository;
 
     @Autowired
+    MovieService movieService;
+
+    @Autowired
+    MovieCollectionService movieCollectionService;
+
+    @Autowired
+    MovieRepository movieRepository;
+
+    @Autowired
+    MovieCollectionRepository movieCollectionRepository;
+
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
     @Test
     void cascadeDeleteSong() throws SongNotFoundException {
@@ -68,9 +78,7 @@ public class CascadeTest {
         //Then
         assertEquals(1, songService.getSongs().size());
         assertEquals(2, songCollectionService.getSongCollections().size());
-        assertEquals(1, userRepository.count());
-        songRepository.deleteAll();
-        songCollectionRepository.deleteAll();
+        assertEquals(1, userService.getUsers().size());
     }
 
     @Test
@@ -109,12 +117,10 @@ public class CascadeTest {
         //Then
         assertEquals(2, songService.getSongs().size());
         assertEquals(1, songCollectionService.getSongCollections().size());
-        assertEquals(1, userRepository.count());
-        songRepository.deleteAll();
-        songCollectionRepository.deleteAll();
+        assertEquals(1, userService.getUsers().size());
     }
     @Test
-    void cascadeDeleteUser() throws SongCollectionNotFoundException {
+    void cascadeDeleteUserWithSongCollections() throws UserNotFoundException {
 
         //Given
         Song song = Song.builder()
@@ -145,12 +151,126 @@ public class CascadeTest {
         SongCollection songCollection1 = songCollectionService.saveSongCollection(songCollection);
         SongCollection songCollection3 = songCollectionService.saveSongCollection(songCollection2);
         //When
-        userRepository.deleteAll();
+        userService.deleteById(songCollection1.getUser().getUserId());
         //Then
         assertEquals(2, songService.getSongs().size());
-        assertEquals(2, songCollectionService.getSongCollections().size());
-        assertEquals(0, userRepository.count());
-        songRepository.deleteAll();
-        songCollectionRepository.deleteAll();
+        assertEquals(0, songCollectionService.getSongCollections().size());
+        assertEquals(0, userService.getUsers().size());
+    }
+
+    @Test
+    void cascadeDeleteMovie() throws MovieNotFoundException {
+
+        //Given
+        Movie movie = Movie.builder()
+                .movieTitle("Test movie")
+                .movieYear(1999)
+                .movieId(1L)
+                .build();
+        Movie movie2 = Movie.builder()
+                .movieTitle("Test movie2")
+                .movieYear(1989)
+                .movieId(2L)
+                .build();
+        User user = userRepository.save(User.builder().userName("Test user").build());
+        MovieCollection movieCollection = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection")
+                .user(user)
+                .build();
+        MovieCollection movieCollection2 = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection2")
+                .user(user)
+                .build();
+        Movie savedMovie = movieService.saveMovie(movie);
+        Movie savedMovie2 = movieService.saveMovie(movie2);
+        movieCollection.getMovies().add(savedMovie);
+        movieCollection.getMovies().add(savedMovie2);
+        movieCollection2.getMovies().add(savedMovie);
+        movieCollection2.getMovies().add(savedMovie2);
+        MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
+        MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+        //When
+        movieService.deleteById(savedMovie.getMovieId());
+        //Then
+        assertEquals(1, movieService.getMovies().size());
+        assertEquals(2, movieCollectionService.getMovieCollections().size());
+        assertEquals(1, userService.getUsers().size());
+    }
+
+    @Test
+    void cascadeDeleteMovieCollection() throws MovieCollectionNotFoundException {
+
+        //Given
+        Movie movie = Movie.builder()
+                .movieTitle("Test movie")
+                .movieYear(1999)
+                .movieId(1L)
+                .build();
+        Movie movie2 = Movie.builder()
+                .movieTitle("Test movie2")
+                .movieYear(1989)
+                .movieId(2L)
+                .build();
+        User user = userRepository.save(User.builder().userName("Test user").build());
+        MovieCollection movieCollection = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection")
+                .user(user)
+                .build();
+        MovieCollection movieCollection2 = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection2")
+                .user(user)
+                .build();
+        Movie savedMovie = movieService.saveMovie(movie);
+        Movie savedMovie2 = movieService.saveMovie(movie2);
+        movieCollection.getMovies().add(savedMovie);
+        movieCollection.getMovies().add(savedMovie2);
+        movieCollection2.getMovies().add(savedMovie);
+        movieCollection2.getMovies().add(savedMovie2);
+        MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
+        MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+        //When
+        movieCollectionService.deleteById(movieCollection1.getMovieCollectionId());
+        //Then
+        assertEquals(2, movieService.getMovies().size());
+        assertEquals(1, movieCollectionService.getMovieCollections().size());
+        assertEquals(1, userService.getUsers().size());
+    }
+    @Test
+    void cascadeDeleteUserWithMovieCollections() throws UserNotFoundException {
+
+        //Given
+        Movie movie = Movie.builder()
+                .movieTitle("Test movie")
+                .movieYear(1999)
+                .movieId(1L)
+                .build();
+        Movie movie2 = Movie.builder()
+                .movieTitle("Test movie2")
+                .movieYear(1989)
+                .movieId(2L)
+                .build();
+        User user = userRepository.save(User.builder().userName("Test user").build());
+        MovieCollection movieCollection = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection")
+                .user(user)
+                .build();
+        MovieCollection movieCollection2 = MovieCollection.builder()
+                .movieCollectionName("Test movieCollection2")
+                .user(user)
+                .build();
+        Movie savedMovie = movieService.saveMovie(movie);
+        Movie savedMovie2 = movieService.saveMovie(movie2);
+        movieCollection.getMovies().add(savedMovie);
+        movieCollection.getMovies().add(savedMovie2);
+        movieCollection2.getMovies().add(savedMovie);
+        movieCollection2.getMovies().add(savedMovie2);
+        MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
+        MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+        //When
+        userService.deleteById(movieCollection1.getUser().getUserId());
+        //Then
+        assertEquals(2, movieService.getMovies().size());
+        assertEquals(0, movieCollectionService.getMovieCollections().size());
+        assertEquals(0, userService.getUsers().size());
     }
 }
