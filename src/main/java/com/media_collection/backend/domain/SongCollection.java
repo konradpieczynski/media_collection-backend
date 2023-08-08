@@ -50,7 +50,6 @@ public class SongCollection {
 
     @PreRemove
     private void removeThisFromRelations() {
-        user.getSongCollections().remove(this);
         for (Song song : songs) {
             song.getSongCollections().remove(this);
         }

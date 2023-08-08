@@ -3,13 +3,15 @@ package com.media_collection.backend.service;
 import com.media_collection.backend.controller.exceptions.*;
 import com.media_collection.backend.domain.*;
 import com.media_collection.backend.repository.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@Transactional
+
+
 @SpringBootTest
 public class CascadeTest {
     @Autowired
@@ -42,18 +44,27 @@ public class CascadeTest {
     @Autowired
     UserService userService;
 
+    @AfterEach
+    public void afterEachTest(){
+        songRepository.deleteAll();
+        songCollectionRepository.deleteAll();
+        movieRepository.deleteAll();
+        movieCollectionRepository.deleteAll();
+        userRepository.deleteAll();
+    }
+
     @Test
     void cascadeDeleteSong() throws SongNotFoundException {
 
         //Given
         Song song = Song.builder()
                 .songTitle("Test song")
-                .songAuthor("a1")
+                .songAuthor("test author")
                 .songId(1L)
                 .build();
         Song song2 = Song.builder()
                 .songTitle("Test song2")
-                .songAuthor("a2")
+                .songAuthor("test author")
                 .songId(2L)
                 .build();
         User user = userRepository.save(User.builder().userName("Test user").build());
@@ -67,12 +78,18 @@ public class CascadeTest {
                 .build();
         Song savedSong = songService.saveSong(song);
         Song savedSong2 = songService.saveSong(song2);
-        songCollection.getSongs().add(savedSong);
-        songCollection.getSongs().add(savedSong2);
-        songCollection2.getSongs().add(savedSong);
-        songCollection2.getSongs().add(savedSong2);
+
         SongCollection songCollection1 = songCollectionService.saveSongCollection(songCollection);
         SongCollection songCollection3 = songCollectionService.saveSongCollection(songCollection2);
+
+        songCollection1.getSongs().add(savedSong);
+        songCollection1.getSongs().add(savedSong2);
+        songCollection3.getSongs().add(savedSong);
+        songCollection3.getSongs().add(savedSong2);
+
+        songCollectionService.saveSongCollection(songCollection1);
+        songCollectionService.saveSongCollection(songCollection3);
+
         //When
         songService.deleteById(savedSong.getSongId());
         //Then
@@ -87,12 +104,12 @@ public class CascadeTest {
         //Given
         Song song = Song.builder()
                 .songTitle("Test song")
-                .songAuthor("a1")
+                .songAuthor("test author")
                 .songId(1L)
                 .build();
         Song song2 = Song.builder()
                 .songTitle("Test song2")
-                .songAuthor("a2")
+                .songAuthor("test author")
                 .songId(2L)
                 .build();
         User user = userRepository.save(User.builder().userName("Test user").build());
@@ -106,14 +123,19 @@ public class CascadeTest {
                 .build();
         Song savedSong = songService.saveSong(song);
         Song savedSong2 = songService.saveSong(song2);
-        songCollection.getSongs().add(savedSong);
-        songCollection.getSongs().add(savedSong2);
-        songCollection2.getSongs().add(savedSong);
-        songCollection2.getSongs().add(savedSong2);
+
         SongCollection songCollection1 = songCollectionService.saveSongCollection(songCollection);
         SongCollection songCollection3 = songCollectionService.saveSongCollection(songCollection2);
+
+        songCollection1.getSongs().add(savedSong);
+        songCollection1.getSongs().add(savedSong2);
+        songCollection3.getSongs().add(savedSong);
+        songCollection3.getSongs().add(savedSong2);
+
+        songCollectionService.saveSongCollection(songCollection1);
+        SongCollection songCollection5 = songCollectionService.saveSongCollection(songCollection3);
         //When
-        songCollectionService.deleteById(songCollection1.getSongCollectionId());
+        songCollectionService.deleteById(songCollection5.getSongCollectionId());
         //Then
         assertEquals(2, songService.getSongs().size());
         assertEquals(1, songCollectionService.getSongCollections().size());
@@ -125,12 +147,12 @@ public class CascadeTest {
         //Given
         Song song = Song.builder()
                 .songTitle("Test song")
-                .songAuthor("a1")
+                .songAuthor("test author")
                 .songId(1L)
                 .build();
         Song song2 = Song.builder()
                 .songTitle("Test song2")
-                .songAuthor("a2")
+                .songAuthor("test author")
                 .songId(2L)
                 .build();
         User user = userRepository.save(User.builder().userName("Test user").build());
@@ -144,20 +166,25 @@ public class CascadeTest {
                 .build();
         Song savedSong = songService.saveSong(song);
         Song savedSong2 = songService.saveSong(song2);
-        songCollection.getSongs().add(savedSong);
-        songCollection.getSongs().add(savedSong2);
-        songCollection2.getSongs().add(savedSong);
-        songCollection2.getSongs().add(savedSong2);
+
         SongCollection songCollection1 = songCollectionService.saveSongCollection(songCollection);
         SongCollection songCollection3 = songCollectionService.saveSongCollection(songCollection2);
+
+        songCollection1.getSongs().add(savedSong);
+        songCollection1.getSongs().add(savedSong2);
+        songCollection3.getSongs().add(savedSong);
+        songCollection3.getSongs().add(savedSong2);
+
+        songCollectionService.saveSongCollection(songCollection1);
+        SongCollection songCollection5 = songCollectionService.saveSongCollection(songCollection3);
+
         //When
-        userService.deleteById(songCollection1.getUser().getUserId());
+        userService.deleteById(user.getUserId());
         //Then
         assertEquals(2, songService.getSongs().size());
         assertEquals(0, songCollectionService.getSongCollections().size());
         assertEquals(0, userService.getUsers().size());
     }
-
     @Test
     void cascadeDeleteMovie() throws MovieNotFoundException {
 
@@ -183,12 +210,18 @@ public class CascadeTest {
                 .build();
         Movie savedMovie = movieService.saveMovie(movie);
         Movie savedMovie2 = movieService.saveMovie(movie2);
-        movieCollection.getMovies().add(savedMovie);
-        movieCollection.getMovies().add(savedMovie2);
-        movieCollection2.getMovies().add(savedMovie);
-        movieCollection2.getMovies().add(savedMovie2);
+
         MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
         MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+
+        movieCollection1.getMovies().add(savedMovie);
+        movieCollection1.getMovies().add(savedMovie2);
+        movieCollection3.getMovies().add(savedMovie);
+        movieCollection3.getMovies().add(savedMovie2);
+
+        movieCollectionService.saveMovieCollection(movieCollection1);
+        movieCollectionService.saveMovieCollection(movieCollection3);
+
         //When
         movieService.deleteById(savedMovie.getMovieId());
         //Then
@@ -222,14 +255,19 @@ public class CascadeTest {
                 .build();
         Movie savedMovie = movieService.saveMovie(movie);
         Movie savedMovie2 = movieService.saveMovie(movie2);
-        movieCollection.getMovies().add(savedMovie);
-        movieCollection.getMovies().add(savedMovie2);
-        movieCollection2.getMovies().add(savedMovie);
-        movieCollection2.getMovies().add(savedMovie2);
+
         MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
         MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+
+        movieCollection1.getMovies().add(savedMovie);
+        movieCollection1.getMovies().add(savedMovie2);
+        movieCollection3.getMovies().add(savedMovie);
+        movieCollection3.getMovies().add(savedMovie2);
+
+        movieCollectionService.saveMovieCollection(movieCollection1);
+        MovieCollection movieCollection5 = movieCollectionService.saveMovieCollection(movieCollection3);
         //When
-        movieCollectionService.deleteById(movieCollection1.getMovieCollectionId());
+        movieCollectionService.deleteById(movieCollection5.getMovieCollectionId());
         //Then
         assertEquals(2, movieService.getMovies().size());
         assertEquals(1, movieCollectionService.getMovieCollections().size());
@@ -260,17 +298,24 @@ public class CascadeTest {
                 .build();
         Movie savedMovie = movieService.saveMovie(movie);
         Movie savedMovie2 = movieService.saveMovie(movie2);
-        movieCollection.getMovies().add(savedMovie);
-        movieCollection.getMovies().add(savedMovie2);
-        movieCollection2.getMovies().add(savedMovie);
-        movieCollection2.getMovies().add(savedMovie2);
+
         MovieCollection movieCollection1 = movieCollectionService.saveMovieCollection(movieCollection);
         MovieCollection movieCollection3 = movieCollectionService.saveMovieCollection(movieCollection2);
+
+        movieCollection1.getMovies().add(savedMovie);
+        movieCollection1.getMovies().add(savedMovie2);
+        movieCollection3.getMovies().add(savedMovie);
+        movieCollection3.getMovies().add(savedMovie2);
+
+        movieCollectionService.saveMovieCollection(movieCollection1);
+        movieCollectionService.saveMovieCollection(movieCollection3);
+
         //When
-        userService.deleteById(movieCollection1.getUser().getUserId());
+        userService.deleteById(user.getUserId());
         //Then
         assertEquals(2, movieService.getMovies().size());
         assertEquals(0, movieCollectionService.getMovieCollections().size());
         assertEquals(0, userService.getUsers().size());
     }
+
 }
