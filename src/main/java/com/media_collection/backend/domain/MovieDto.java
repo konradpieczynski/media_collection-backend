@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -19,5 +17,5 @@ public class MovieDto {
     private String movieTitle;
     private int movieYear;
     @Builder.Default
-    private Set<Long> movieCollectionList = new HashSet<>();
+    private Set<Long> movieCollections = new HashSet<>();
 }
