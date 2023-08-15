@@ -27,4 +27,3 @@ MYSQL_PASSWORD="mysql password"
 <p align="center"><img src="/screenshots/example_response2.png" width=800></p>
 <p align="center"><img src="/screenshots/example_response3.png" width=800></p>
 <p align="center"><img src="/screenshots/example_response4.png" width=800></p>
-<p align="center"><img src="/screenshots/example_response5.png" width=800></p>
