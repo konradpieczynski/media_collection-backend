@@ -19,11 +19,11 @@ MYSQL_PASSWORD="mysql password"
 
 <h2>Jacoco results:</h2>
 
-<p align="center"><img src="/screenshots/jaccoco.png" width=800></p>
+<p align="center"><img src="/Screenshots/jaccoco.png" width=800></p>
 
 <h2>Example responses:</h2>
-<p align="center"><img src="/screenshots/example_response.png" width=800></p>
-<p align="center"><img src="/screenshots/example_response1.png" width=800></p>
-<p align="center"><img src="/screenshots/example_response2.png" width=800></p>
-<p align="center"><img src="/screenshots/example_response3.png" width=800></p>
-<p align="center"><img src="/screenshots/example_response4.png" width=800></p>
+<p align="center"><img src="/Screenshots/example_response.png" width=800></p>
+<p align="center"><img src="/Screenshots/example_response1.png" width=800></p>
+<p align="center"><img src="/Screenshots/example_response2.png" width=800></p>
+<p align="center"><img src="/Screenshots/example_response3.png" width=800></p>
+<p align="center"><img src="/Screenshots/example_response4.png" width=800></p>
